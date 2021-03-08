@@ -1,0 +1,31 @@
+{
+  "name": "figlets",
+  "version": "0.0.0-alpha.0",
+  "description": "A collection of helpers for Figma plugins ",
+  "main": "index.js",
+  "dependencies": {
+    "jest": "^26.6.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
+    "figma-api-stub": "0.0.45"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Figlets/Figlets.git"
+  },
+  "keywords": [
+    "figma",
+    "helpers",
+    "functions"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Figlets/Figlets/issues"
+  },
+  "homepage": "https://github.com/Figlets/Figlets#readme"
+}

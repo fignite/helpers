@@ -11,16 +11,16 @@ For each helper create a unit test by making a file with the same name as the he
 import { createStuff } from './createStuff';
 
 test('Describe your test', () => {
-
+    
 });
 ```
 
-If you need to use the Figma Plugin API, you can reference it using an API stub.
+Unit tests use a global Figma API stub and can just be referenced as normal
 
 ```js
-import { createFigma } from 'figma-api-stub';
+// __tests__/createRectangles.test.ts
 
-const figma = createFigma({});
+var rect = figma.createRectangle()
 ```
 
 Follow the [Jest Docs](https://jestjs.io/docs/getting-started) for more guidance on writing tests.

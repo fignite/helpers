@@ -1,3 +1,7 @@
+/**
+ * Mimics similar behaviour to ungrouping nodes in editor.
+ */
+
 export function ungroupNode(node, parent) {
     let selection = []
     let children = node.children

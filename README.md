@@ -3,7 +3,7 @@ A collection of helpers for Figma plugins
 
 ## Testing
 
-For each helper create a unit test by making a file with the same name as the helper in the `__tests__` directory. Use *Jests* built-in `test()` function to create a test.
+For each helper create a unit test by making a file with the same name as the helper in the `__tests__` directory. Use *Jest's* built-in `test()` function to create a test.
 
 ```js
 // __tests__/createRectangles.test.ts
@@ -25,7 +25,7 @@ const figma = createFigma({});
 
 Follow the [Jest Docs](https://jestjs.io/docs/getting-started) for more guidance on writing tests.
 
-Finally to see if you're test passes, run:
+Finally to see if your test passes, run:
 
 ```bash
 npm run test

@@ -1,3 +1,3 @@
 export function createStuff() {
-    console.log("Code here")
+    return figma.createFrame()
 }

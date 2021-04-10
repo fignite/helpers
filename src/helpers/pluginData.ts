@@ -2,15 +2,29 @@
  * Helpers which automatically parse and stringify when you get, set or update plugin data
  */
 
-export function getPluginData(node, key) {
+
+
+/**
+ * 
+ * @param {BaseNode} node A figma node to get data from
+ * @param {string} key  The key under which data is stored 
+ * @returns Plugin Data
+ */
+export function getPluginData(node: BaseNode, key: string) {
     return JSON.parse(node.getPluginData(key))
 }
 
-export function setPluginData(node, key, data) {
+/**
+ * 
+ * @param {BaseNode} node  A figma node to set data on
+ * @param {String} key A key to store data under
+ * @param {any} data Data to be stoed
+ */
+export function setPluginData(node: BaseNode, key: string, data: any) {
     node.setPluginData(key, JSON.stringify(data))
 }
 
-export function updatePluginData(node, key, callback) {
+export function updatePluginData(node: BaseNode, key: string, callback: Function) {
     var data
 
     if (node.getPluginData(key)) {
@@ -29,5 +43,5 @@ export function updatePluginData(node, key, callback) {
 
     node.setPluginData(key, JSON.stringify(data))
 
-    return data
+    return data as any
 }

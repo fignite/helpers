@@ -6,7 +6,7 @@
  * @param {boolean} isplaceholder display the value as a placeholder value
  */
 
-export async function prompt(title,description,value,isplaceholder){
+export async function prompt(title: string,description: string,value: string,isplaceholder: boolean){
     let t = Date.now()
 
     let input = isplaceholder ? `placeholder="${value}"`:`value="${value}"`

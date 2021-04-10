@@ -1,9 +1,12 @@
 /**
  * Mimics similar behaviour to ungrouping nodes in editor.
+ * @param {SceneNode & ChildrenMixin } node A node with children
+ * @param parent Target container to append ungrouped nodes to
+ * @returns Selection of node's children
  */
 
-export function ungroupNode(node, parent) {
-    let selection = []
+export function ungroupNode(node: SceneNode & ChildrenMixin, parent: SceneNode & ChildrenMixin) {
+    let selection: SceneNode[] = []
     let children = node.children
 
     for (let i = 0; i < children.length; i++) {

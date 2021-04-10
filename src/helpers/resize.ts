@@ -24,7 +24,3 @@ export function resize(node: SceneNode & LayoutMixin, width: number, height: num
     }
     return node
     }
-
-    export function almostZero(){
-        return 1/Number.MAX_SAFE_INTEGER
-    }

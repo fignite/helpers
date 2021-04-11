@@ -117,11 +117,11 @@ test('copy properties to targetNode but exlcude certain properties', () => {
     })
 })
 
-// test('use a callback while copying properties from source node to target node', () => {
-//     console.log(copyPaste(sourceNode, targetNode, (prop) => {
+test('use a callback while copying properties from source node to target node', () => {
+    console.log(copyPaste(sourceNode, targetNode, (prop) => {
 
-//     }))
-// })
+    }))
+})
 
 // describe('copyPasteNode', () => {
 //     test('copy compatible properties', () => {

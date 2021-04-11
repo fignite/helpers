@@ -1,15 +1,3 @@
-/**
- * Allows you to copy and paste props between nodes
- * 
- * Examples:
- * 
- * copyPaste(source, {}, { include: ['name'] })
- * copyPaste(source, target, { include: ['name'] })
- * copyPaste(source, target, { exclude: ['fills'] })
- * copyPaste(source, target, (prop) => { prop.type === "FRAME" })
- * 
- */
-
 const nodeProps: string[] = [
     'id',
     'parent',
@@ -144,19 +132,36 @@ const mixedProps = {
 //     }
 // }
 
-interface Options {
+type Options = {
     withoutRelations?: boolean
-    removeConflicts?: boolean
-    include?: string[]
-    exclude?: string[]
+    removeConflicts?: boolean,
+    exclude: string[],
+    include?: undefined
+} | {
+    withoutRelations?: boolean
+    removeConflicts?: boolean,
+    include: string[],
+    exclude?: undefined
 }
 
-// type Callback = (prop?: string) => void
+type Callback = (prop: string) => void;
 
-interface Callback { (prop?: string): void }
+// export function copyPaste(source: {} | BaseNode, target: {} | BaseNode)
+// export function copyPaste(source: {} | BaseNode, target: {} | BaseNode, options: Options)
+// export function copyPaste(source: {} | BaseNode, target: {} | BaseNode, callback: Callback)
+// export function copyPaste(source: {} | BaseNode, target: {} | BaseNode, options: Options, callback: Callback)
+// export function copyPaste(source: {} | BaseNode, target: {} | BaseNode, callback: Callback, options: Options)
 
+/**
+* Allows you to copy and paste props between nodes.
+*
+* @param source - The node or object you want to copy from
+* @param target - The node or object you want to paste to
+* @param args - Either options or a callback
+* @returns A node or object with the properties copied over
+*/
 
-export function copyPaste(source: {} | Node, target: {} | Node, ...args: (Options | Callback)[]) {
+export function copyPaste(source: BaseNode, target: {} | BaseNode, ...args: (Options | Callback)[]) {
 
     var callback, options;
 
@@ -213,12 +218,19 @@ export function copyPaste(source: {} | Node, target: {} | Node, ...args: (Option
     if (source.parent && !withoutRelations) {
         obj.parent = { id: source.parent.id, type: source.parent.type }
     }
-    if (source.children && !withoutRelations) {
-        obj.children = source.children.map((child: any) => copyPaste(child, withoutRelations))
+
+    if (source.type === "FRAME" || source.type === "COMPONENT" || source.type === "COMPONENT_SET" || source.type === "PAGE" || source.type === 'GROUP' || source.type === 'INSTANCE' || source.type === 'DOCUMENT' || source.type === 'BOOLEAN_OPERATION') {
+        if (source.children && !withoutRelations) {
+            obj.children = source.children.map((child: any) => copyPaste(child, withoutRelations))
+        }
     }
-    if (source.masterComponent && !withoutRelations) {
-        obj.masterComponent = copyPaste(source.masterComponent, withoutRelations)
+
+    if (source.type === "INSTANCE") {
+        if (source.mainComponent && !withoutRelations) {
+            obj.masterComponent = copyPaste(source.mainComponent, withoutRelations)
+        }
     }
+
 
     if (!removeConflicts) {
         !obj.fillStyleId && obj.fills ? delete obj.fillStyleId : delete obj.fills

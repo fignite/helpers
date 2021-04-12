@@ -66,7 +66,8 @@ const nodeProps: string[] = [
     'layoutGrids',
     'gridStyleId',
     'clipsContent',
-    'guides'
+    'guides',
+    'type'
 ]
 
 const instanceProps: string[] = [
@@ -195,8 +196,15 @@ export function copyPaste(source: BaseNode, target: {} | BaseNode, ...args: (Opt
         })
     }
 
+    var obj: any = target;
 
-    const obj: any = target || { id: source.id, type: source.type }
+    if (obj.id === undefined) {
+        obj.id = source.id
+    }
+
+    if (obj.type === undefined) {
+        obj.type = source.type
+    }
 
     for (const [key, value] of Object.entries(source)) {
 

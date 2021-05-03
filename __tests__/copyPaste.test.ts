@@ -83,7 +83,7 @@ test('copy properties from to target node while avoiding conflicts', () => {
 })
 
 test('only copy certain properties to targetNode', () => {
-    expect(copyPaste(sourceNode, targetNode, { include: ['name'] })).toEqual({
+    expect(copyPaste(sourceNode, targetNode, { only: ['name'] })).toEqual({
         id: '1:3',
         type: 'FRAME',
         children: [],
@@ -96,7 +96,7 @@ test('only copy certain properties to targetNode', () => {
 })
 
 test('copy properties to targetNode but exlcude certain properties', () => {
-    expect(copyPaste(sourceNode, targetNode, { exclude: ['fills', 'strokes'] })).toEqual({
+    expect(copyPaste(sourceNode, targetNode, { except: ['fills', 'strokes'] })).toEqual({
         id: '1:3',
         type: 'FRAME',
         children: [],

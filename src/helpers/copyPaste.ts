@@ -136,13 +136,13 @@ const mixedProps = {
 type Options = {
     withoutRelations?: boolean
     removeConflicts?: boolean,
-    exclude: string[],
-    include?: undefined
+    except: string[],
+    only?: undefined
 } | {
     withoutRelations?: boolean
     removeConflicts?: boolean,
-    include: string[],
-    exclude?: undefined
+    only: string[],
+    except?: undefined
 }
 
 type Callback = (prop: string) => void;
@@ -174,18 +174,18 @@ export function copyPaste(source: BaseNode, target: {} | BaseNode, ...args: (Opt
 
     if (!options) options = {}
 
-    const { include, exclude, withoutRelations, removeConflicts } = options
+    const { only, except, withoutRelations, removeConflicts } = options
 
     // const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
     let allowlist: string[] = nodeProps
 
-    if (include) {
-        // If include supplied, only copy across these properties and their values if they exist
-        allowlist = include
-    } else if (exclude) {
-        // If exclude supplied then don't copy over the values of these properties
+    if (only) {
+        // If only supplied, only copy across these properties and their values if they exist
+        allowlist = only
+    } else if (except) {
+        // If except supplied then don't copy over the values of these properties
         allowlist = allowlist.filter(function (el) {
-            return !exclude.concat(readOnly).includes(el)
+            return !except.concat(readOnly).includes(el)
         })
     }
 

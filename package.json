@@ -1,10 +1,11 @@
 {
-  "name": "figlets",
+  "name": "@figlets/helpers",
   "version": "0.0.0-alpha.0",
   "description": "A collection of helpers for Figma plugins ",
-  "main": "index.js",
+  "main": "dist/index.js",
   "devDependencies": {
-    "@babel/core": "^7.13.10",
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
     "@babel/plugin-transform-modules-commonjs": "^7.13.8",
     "@babel/preset-typescript": "^7.13.0",
     "@figma/plugin-typings": "^1.19.2",
@@ -14,8 +15,12 @@
     "typescript": "^4.2.3"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "npx babel src --presets=@babel/preset-typescript --extensions \".ts\" --out-dir dist && tsc --build tsconfig.build.json"
   },
+  "files": [
+    "dist/"
+  ],
   "jest": {
     "setupFiles": [
       "<rootDir>/jest/globals.js"

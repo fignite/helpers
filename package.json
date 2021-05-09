@@ -1,7 +1,7 @@
 {
   "name": "@figlets/helpers",
   "version": "0.0.0-alpha.0",
-  "description": "A collection of helpers for Figma plugins ",
+  "description": "A collection of helpers for Figma plugins",
   "main": "dist/index.js",
   "devDependencies": {
     "@babel/cli": "^7.13.16",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Figlets/Figlets.git"
+    "url": "git+https://github.com/Figlets/helpers.git"
   },
   "keywords": [
     "figma",

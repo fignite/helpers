@@ -30,3 +30,17 @@ Finally to see if your test passes, run:
 ```bash
 npm run test
 ```
+
+## Publishing
+
+Install `np` for publishing.
+
+```
+npm install --global np
+```
+
+Publish by running `np`
+
+```
+np
+```

@@ -136,13 +136,8 @@ const mixedProps = {
 type Options = {
     withoutRelations?: boolean
     removeConflicts?: boolean,
-    except: string[],
-    only?: undefined
-} | {
-    withoutRelations?: boolean
-    removeConflicts?: boolean,
-    only: string[],
-    except?: undefined
+    exclude?: string[],
+    include?: string[]
 }
 
 type Callback = (prop: string) => void;
@@ -156,9 +151,9 @@ type Callback = (prop: string) => void;
 /**
 * Allows you to copy and paste props between nodes.
 *
-* @param source - The node or object you want to copy from
+* @param source - The node you want to copy from
 * @param target - The node or object you want to paste to
-* @param args - Either options or a callback
+* @param args - Either options or a callback.
 * @returns A node or object with the properties copied over
 */
 
@@ -174,18 +169,20 @@ export function copyPaste(source: BaseNode, target: {} | BaseNode, ...args: (Opt
 
     if (!options) options = {}
 
-    const { only, except, withoutRelations, removeConflicts } = options
+    const { include, exclude, withoutRelations, removeConflicts } = options
 
     // const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
     let allowlist: string[] = nodeProps
 
-    if (only) {
-        // If only supplied, only copy across these properties and their values if they exist
-        allowlist = only
-    } else if (except) {
-        // If except supplied then don't copy over the values of these properties
+    if (include) {
+        // If include supplied, include copy across these properties and their values if they exist
+        allowlist = include
+    }
+    
+    if (exclude) {
+        // If exclude supplied then don't copy over the values of these properties
         allowlist = allowlist.filter(function (el) {
-            return !except.concat(readOnly).includes(el)
+            return !exclude.concat(readOnly).includes(el)
         })
     }
 

@@ -5,7 +5,7 @@
  * @returns Selection of node's children
  */
 
-export function ungroupNode(node: SceneNode & ChildrenMixin, parent: SceneNode & ChildrenMixin | PageNode) {
+export function ungroup(node: SceneNode & ChildrenMixin, parent: SceneNode & ChildrenMixin | PageNode) {
     let selection: SceneNode[] = []
     let children = node.children
 

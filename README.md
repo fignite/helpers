@@ -1,14 +1,29 @@
-# Figlets
-A collection of helpers for Figma plugins
+# Figlets Helpers
+
+A collection of helpers for Figma plugins.
+
+## Uages
+
+Install using the following
+
+```bash
+npm install @figlets/helpers
+```
+
+Include in your `main` code
+
+```js
+import { ungroup } from '@figlets/helpers'
+```
 
 ## Testing
 
 For each helper create a unit test by making a file with the same name as the helper in the `__tests__` directory. Use *Jest's* built-in `test()` function to create a test.
 
 ```js
-// __tests__/createRectangles.test.ts
+// __tests__/ungroup.test.ts
 
-import { createStuff } from './createStuff';
+import { ungroup } from './src/helpers/ungroup';
 
 test('Describe your test', () => {
     
@@ -18,7 +33,7 @@ test('Describe your test', () => {
 Unit tests use a global Figma API stub and can just be referenced as normal
 
 ```js
-// __tests__/createRectangles.test.ts
+// __tests__/createRectangle.test.ts
 
 var rect = figma.createRectangle()
 ```

@@ -89,7 +89,9 @@ const readOnly: string[] = [
     'reactions',
     'remote',
     'key',
-    'type'
+    'type',
+    'masterComponent',
+    'mainComponent'
 ]
 
 const defaults: string[] = [
@@ -157,7 +159,7 @@ type Callback = (prop: string) => void;
 * @returns A node or object with the properties copied over
 */
 
-export function copyPaste(source: BaseNode, target: {} | BaseNode, ...args: (Options | Callback)[]) {
+export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options | Callback)[]) {
 
     var callback, options;
 
@@ -172,11 +174,17 @@ export function copyPaste(source: BaseNode, target: {} | BaseNode, ...args: (Opt
     const { include, exclude, withoutRelations, removeConflicts } = options
 
     // const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
-    let allowlist: string[] = nodeProps
+    let allowlist: string[] = nodeProps.filter(function (el) {
+        return !readOnly.includes(el)
+    })
 
     if (include) {
         // If include supplied, include copy across these properties and their values if they exist
-        allowlist = include
+        allowlist = include.filter(function (el) {
+            return !readOnly.includes(el)
+        })
+
+        
     }
     
     if (exclude) {
@@ -203,36 +211,56 @@ export function copyPaste(source: BaseNode, target: {} | BaseNode, ...args: (Opt
         obj.type = source.type
     }
 
-    for (const [key, value] of Object.entries(source)) {
+    const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
 
-        if (allowlist.includes(key)) {
+    for (const [key, value] of props) {
 
-            obj[key] = value
+        if (value.get && allowlist.includes(key)) {
+
+            try {
+                if (typeof obj[key] === 'symbol') {
+                    obj[key] = 'Mixed'
+                } else {
+                    console.log(key, value)
+                    obj[key] = value.get.call(source)
+                }
+            } catch (err) {
+                obj[key] = undefined
+            }
+
+            
+            
+
+            // obj[key] = value
         }
 
-        if (callback) {
-            callback(obj)
-        }
-        else {
+        // Needs building in
+        // if (callback) {
+        //     callback(obj)
+        // }
+        // else {
 
-        }
-
+        // }
 
     }
 
-    if (source.parent && !withoutRelations) {
+    // Only applicable to objects because these properties cannot be set on nodes
+    if (target === {} && source.parent && !withoutRelations) {
         obj.parent = { id: source.parent.id, type: source.parent.type }
     }
 
-    if (source.type === "FRAME" || source.type === "COMPONENT" || source.type === "COMPONENT_SET" || source.type === "PAGE" || source.type === 'GROUP' || source.type === 'INSTANCE' || source.type === 'DOCUMENT' || source.type === 'BOOLEAN_OPERATION') {
-        if (source.children && !withoutRelations) {
-            obj.children = source.children.map((child: any) => copyPaste(child, withoutRelations))
+    // Only applicable to objects because these properties cannot be set on nodes
+    if (target === {}) {
+        if (source.type === "FRAME" || source.type === "COMPONENT" || source.type === "COMPONENT_SET" || source.type === "PAGE" || source.type === 'GROUP' || source.type === 'INSTANCE' || source.type === 'DOCUMENT' || source.type === 'BOOLEAN_OPERATION') {
+            if (source.children && !withoutRelations) {
+                obj.children = source.children.map((child: any) => copyPaste(child, {}, { withoutRelations }))
+            }
         }
-    }
 
-    if (source.type === "INSTANCE") {
-        if (source.mainComponent && !withoutRelations) {
-            obj.masterComponent = copyPaste(source.mainComponent, withoutRelations)
+        if (source.type === "INSTANCE") {
+            if (source.mainComponent && !withoutRelations) {
+                obj.masterComponent = copyPaste(source.mainComponent, {}, { withoutRelations })
+            }
         }
     }
 

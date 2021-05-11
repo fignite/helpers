@@ -2,7 +2,7 @@
 
 A collection of helpers for Figma plugins.
 
-## Uages
+## Usage
 
 Install using the following
 

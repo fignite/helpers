@@ -161,6 +161,12 @@ type Callback = (prop: string) => void;
 
 export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options | Callback)[]) {
 
+    var targetIsEmpty
+
+    if (target && Object.keys(target).length === 0 && target.constructor === Object) {
+        targetIsEmpty = true
+    }
+
     var callback, options;
 
     if (typeof args[0] === 'function') callback = args[0]
@@ -195,7 +201,7 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
     }
 
     // target supplied, don't copy over the values of these properties
-    if (target !== {}) {
+    if (target && !targetIsEmpty) {
         allowlist = allowlist.filter(function (el) {
             return !['id', 'type'].includes(el)
         })
@@ -211,27 +217,27 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
         obj.type = source.type
     }
 
-    const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
+    // const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
 
-    for (const [key, value] of props) {
+    for (const [key, value] of Object.entries(source)) {
 
-        if (value.get && allowlist.includes(key)) {
+        if (allowlist.includes(key)) {
 
-            try {
-                if (typeof obj[key] === 'symbol') {
-                    obj[key] = 'Mixed'
-                } else {
-                    console.log(key, value)
-                    obj[key] = value.get.call(source)
-                }
-            } catch (err) {
-                obj[key] = undefined
-            }
+            // try {
+            //     if (typeof obj[key] === 'symbol') {
+            //         obj[key] = 'Mixed'
+            //     } else {
+            //         console.log(key, value)
+            //         obj[key] = value.get.call(source)
+            //     }
+            // } catch (err) {
+            //     obj[key] = undefined
+            // }
 
             
             
 
-            // obj[key] = value
+            obj[key] = value
         }
 
         // Needs building in
@@ -245,12 +251,14 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
     }
 
     // Only applicable to objects because these properties cannot be set on nodes
-    if (target === {} && source.parent && !withoutRelations) {
-        obj.parent = { id: source.parent.id, type: source.parent.type }
+    if (targetIsEmpty) {
+        if (source.parent && !withoutRelations) {
+            obj.parent = { id: source.parent.id, type: source.parent.type }
+        }
     }
 
     // Only applicable to objects because these properties cannot be set on nodes
-    if (target === {}) {
+    if (targetIsEmpty) {
         if (source.type === "FRAME" || source.type === "COMPONENT" || source.type === "COMPONENT_SET" || source.type === "PAGE" || source.type === 'GROUP' || source.type === 'INSTANCE' || source.type === 'DOCUMENT' || source.type === 'BOOLEAN_OPERATION') {
             if (source.children && !withoutRelations) {
                 obj.children = source.children.map((child: any) => copyPaste(child, {}, { withoutRelations }))

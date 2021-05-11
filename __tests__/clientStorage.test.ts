@@ -1,7 +1,7 @@
 import { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync } from '../src/helpers/clientStorage';
 
 test(`cannot test as clientStorage doesn't exist in figma-api-test`, () => {
-    console.log(figma.clientStorage)
+
 })
 
 // test('get client storage', () => {

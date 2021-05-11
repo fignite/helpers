@@ -4,7 +4,7 @@ import { copyPaste } from '../src/helpers/copyPaste';
 var sourceNode = figma.createRectangle()
 var targetNode = figma.createFrame()
 
-// We do this because this is the only way to reset the obhect back to it's orginal state after test (although figma-api-stub doesn't create name, but it should)
+// We do this because this is the only way to reset the object back to it's orginal state after test (although figma-api-stub doesn't create name, but it should)
 var targetOrigName = targetNode.name
 
 beforeEach(() => {
@@ -53,17 +53,17 @@ test('copy all properties to an object', () => {
             }
         ]
     })
+
+    // console.log(copyPaste(sourceNode, {}))
 })
 
 test('copy properties from to target node while avoiding conflicts', () => {
+    
     expect(copyPaste(sourceNode, targetNode)).toEqual({
         id: '1:3',
         type: 'FRAME',
         children: [],
-        parent: {
-            id: '0:1',
-            type: 'PAGE'
-        },
+        parent: expect.anything(),
         name: 'Rectangle',
         fillStyleId: "S:ec61af737cd69824f329118fdcb3b0b96985139d,",
         strokes: [
@@ -87,10 +87,7 @@ test('only copy certain properties to targetNode', () => {
         id: '1:3',
         type: 'FRAME',
         children: [],
-        parent: {
-            id: '0:1',
-            type: 'PAGE'
-        },
+        parent: expect.anything(),
         name: 'Rectangle'
     })
 })
@@ -100,10 +97,7 @@ test('copy properties to targetNode but exlcude certain properties', () => {
         id: '1:3',
         type: 'FRAME',
         children: [],
-        parent: {
-            id: '0:1',
-            type: 'PAGE'
-        },
+        parent: expect.anything(),
         name: 'Rectangle',
         fillStyleId: 'S:ec61af737cd69824f329118fdcb3b0b96985139d,'
     })

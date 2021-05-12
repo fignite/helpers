@@ -217,27 +217,23 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
         obj.type = source.type
     }
 
-    // const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
+    const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
 
-    for (const [key, value] of Object.entries(source)) {
+    for (const [key, value] of props) {
+
+        
 
         if (allowlist.includes(key)) {
 
-            // try {
-            //     if (typeof obj[key] === 'symbol') {
-            //         obj[key] = 'Mixed'
-            //     } else {
-            //         console.log(key, value)
-            //         obj[key] = value.get.call(source)
-            //     }
-            // } catch (err) {
-            //     obj[key] = undefined
-            // }
-
-            
-            
-
-            obj[key] = value
+            try {
+                if (typeof obj[key] === 'symbol') {
+                    obj[key] = 'Mixed'
+                } else {
+                    obj[key] = value.get.call(source)
+                }
+            } catch (err) {
+                obj[key] = undefined
+            }
         }
 
         // Needs building in

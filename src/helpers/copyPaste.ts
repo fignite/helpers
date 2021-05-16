@@ -217,6 +217,10 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
         obj.type = source.type
     }
 
+    if (obj.key === undefined) {
+        if (source.key) obj.key = source.key
+    }
+
     const props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__))
 
     for (const [key, value] of props) {

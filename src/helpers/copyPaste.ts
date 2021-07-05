@@ -272,7 +272,6 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
         }
     }
 
-
     if (!removeConflicts) {
         !obj.fillStyleId && obj.fills ? delete obj.fillStyleId : delete obj.fills
         !obj.strokeStyleId && obj.strokes ? delete obj.strokeStyleId : delete obj.strokes

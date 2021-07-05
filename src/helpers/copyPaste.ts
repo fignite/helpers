@@ -207,17 +207,17 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
         })
     }
 
-    var obj: any = target;
-
-    if (obj.id === undefined) {
-        obj.id = source.id
-    }
-
-    if (obj.type === undefined) {
-        obj.type = source.type
-    }
+    var obj: any = {};
 
     if (targetIsEmpty) {
+        if (obj.id === undefined) {
+            obj.id = source.id
+        }
+
+        if (obj.type === undefined) {
+            obj.type = source.type
+        }
+
         if (source.key) obj.key = source.key
     }
 
@@ -225,7 +225,7 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
 
     for (const [key, value] of props) {
 
-        
+        console.log(key)
 
         if (allowlist.includes(key)) {
 
@@ -250,29 +250,8 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
 
     }
 
-    // Only applicable to objects because these properties cannot be set on nodes
-    if (targetIsEmpty) {
-        if (source.parent && !withoutRelations) {
-            obj.parent = { id: source.parent.id, type: source.parent.type }
-        }
-    }
-
-    // Only applicable to objects because these properties cannot be set on nodes
-    if (targetIsEmpty) {
-        if (source.type === "FRAME" || source.type === "COMPONENT" || source.type === "COMPONENT_SET" || source.type === "PAGE" || source.type === 'GROUP' || source.type === 'INSTANCE' || source.type === 'DOCUMENT' || source.type === 'BOOLEAN_OPERATION') {
-            if (source.children && !withoutRelations) {
-                obj.children = source.children.map((child: any) => copyPaste(child, {}, { withoutRelations }))
-            }
-        }
-
-        if (source.type === "INSTANCE") {
-            if (source.mainComponent && !withoutRelations) {
-                obj.masterComponent = copyPaste(source.mainComponent, {}, { withoutRelations })
-            }
-        }
-    }
-
     if (!removeConflicts) {
+
         !obj.fillStyleId && obj.fills ? delete obj.fillStyleId : delete obj.fills
         !obj.strokeStyleId && obj.strokes ? delete obj.strokeStyleId : delete obj.strokes
         !obj.backgroundStyleId && obj.backgrounds ? delete obj.backgroundStyleId : delete obj.backgrounds
@@ -303,6 +282,32 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
             delete obj.cornerRadius
         }
     }
+
+    console.log("obj", obj)
+
+    // Only applicable to objects because these properties cannot be set on nodes
+    if (targetIsEmpty) {
+        if (source.parent && !withoutRelations) {
+            obj.parent = { id: source.parent.id, type: source.parent.type }
+        }
+    }
+
+    // Only applicable to objects because these properties cannot be set on nodes
+    if (targetIsEmpty) {
+        if (source.type === "FRAME" || source.type === "COMPONENT" || source.type === "COMPONENT_SET" || source.type === "PAGE" || source.type === 'GROUP' || source.type === 'INSTANCE' || source.type === 'DOCUMENT' || source.type === 'BOOLEAN_OPERATION') {
+            if (source.children && !withoutRelations) {
+                obj.children = source.children.map((child: any) => copyPaste(child, {}, { withoutRelations }))
+            }
+        }
+
+        if (source.type === "INSTANCE") {
+            if (source.mainComponent && !withoutRelations) {
+                obj.masterComponent = copyPaste(source.mainComponent, {}, { withoutRelations })
+            }
+        }
+    }
+
+    Object.assign(target, obj);
 
     return obj
 }

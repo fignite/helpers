@@ -225,8 +225,6 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
 
     for (const [key, value] of props) {
 
-        console.log(key)
-
         if (allowlist.includes(key)) {
 
             try {
@@ -282,8 +280,6 @@ export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options 
             delete obj.cornerRadius
         }
     }
-
-    console.log("obj", obj)
 
     // Only applicable to objects because these properties cannot be set on nodes
     if (targetIsEmpty) {

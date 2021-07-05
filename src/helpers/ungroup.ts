@@ -14,7 +14,10 @@ export function ungroup(node: SceneNode & ChildrenMixin, parent: SceneNode & Chi
         selection.push(children[i])
     }
 
-    node.remove()
-
+    // Doesn't need removing if it's a group node
+    if (node.type !== "GROUP") {
+        node.remove()
+    }
+    
     return selection
 }

@@ -14,9 +14,10 @@ import { getNodeIndex } from './helpers/getNodeIndex'
 import { getNodeLocation } from './helpers/getNodeLocation'
 import { getNoneGroupParent } from './helpers/getNoneGroupParent'
 import { getOverrides } from './helpers/getOverrides'
+import { getPageNode } from './helpers/getPageNode'
 import { getParentInstance } from './helpers/getParentInstance'
 import { getTopInstance } from './helpers/getTopInstance'
 import { isInsideInstance } from './helpers/isInsideInstance'
 import { nodeToObject } from './helpers/nodeToObject'
 
-export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync, dispatchEvent, handleEvent, convertToComponent, copyPaste, getPluginData, setPluginData, updatePluginData, removeChildren, resize, ungroup, getInstanceCounterpart, getInstanceCounterpartUsingLocation, getNodeDepth, getNodeIndex, getNodeLocation, getNoneGroupParent, getOverrides, getParentInstance, getTopInstance, isInsideInstance, nodeToObject }
+export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync, dispatchEvent, handleEvent, convertToComponent, copyPaste, getPluginData, setPluginData, updatePluginData, removeChildren, resize, ungroup, getInstanceCounterpart, getInstanceCounterpartUsingLocation, getNodeDepth, getNodeIndex, getNodeLocation, getNoneGroupParent, getOverrides, getPageNode, getParentInstance, getTopInstance, isInsideInstance, nodeToObject }

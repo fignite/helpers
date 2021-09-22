@@ -1,5 +1,7 @@
 import { copyPaste } from './copyPaste'
 
+// TODO: Change so that it can convert any node to any type?
+
 /**
  * Convert a node to a component
  */

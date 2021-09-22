@@ -1,0 +1,84 @@
+import { getInstanceCounterpart } from './getInstanceCounterpart'
+import { isInsideInstance } from './isInsideInstance'
+import { nodeToObject } from './nodeToObject'
+
+export function getOverrides(node, prop?) {
+
+
+    if (isInsideInstance(node)) {
+        var componentNode = getInstanceCounterpart(node)
+
+        var properties = nodeToObject(node)
+        var overriddenProps = {}
+
+
+
+        if (prop) {
+            if (prop !== "key"
+                && prop !== "mainComponent"
+                && prop !== "absoluteTransform"
+                && prop !== "type"
+                && prop !== "id"
+                && prop !== "parent"
+                && prop !== "children"
+                && prop !== "masterComponent"
+                && prop !== "mainComponent"
+                && prop !== "horizontalPadding"
+                && prop !== "verticalPadding"
+                && prop !== "reactions"
+                && prop !== "overlayPositionType"
+                && prop !== "overflowDirection"
+                && prop !== "numberOfFixedChildren"
+                && prop !== "overlayBackground"
+                && prop !== "overlayBackgroundInteraction"
+                && prop !== "remote"
+                && prop !== "defaultVariant"
+                && prop !== "hasMissingFont"
+                && prop !== "exportSettings") {
+
+                if (JSON.stringify(node[prop]) !== JSON.stringify(componentNode[prop])) {
+
+                    return node[prop]
+                }
+            }
+        } else {
+
+            for (let [key, value] of Object.entries(properties)) {
+                if (key !== "key"
+                    && key !== "mainComponent"
+                    && key !== "absoluteTransform"
+                    && key !== "type"
+                    && key !== "id"
+                    && key !== "parent"
+                    && key !== "children"
+                    && key !== "masterComponent"
+                    && key !== "mainComponent"
+                    && key !== "horizontalPadding"
+                    && key !== "verticalPadding"
+                    && key !== "reactions"
+                    && key !== "overlayPositionType"
+                    && key !== "overflowDirection"
+                    && key !== "numberOfFixedChildren"
+                    && key !== "overlayBackground"
+                    && key !== "overlayBackgroundInteraction"
+                    && key !== "remote"
+                    && key !== "defaultVariant"
+                    && key !== "hasMissingFont"
+                    && key !== "exportSettings") {
+
+                    if (JSON.stringify(properties[key]) !== JSON.stringify(componentNode[key])) {
+
+                        overriddenProps[key] = value
+                    }
+                }
+            }
+
+            if (JSON.stringify(overriddenProps) === "{}") {
+                return false
+            }
+            else {
+                return overriddenProps
+            }
+        }
+    }
+}

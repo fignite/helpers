@@ -7,4 +7,12 @@ import { removeChildren } from './helpers/removeChildren'
 import { resize } from './helpers/resize'
 import { ungroup } from './helpers/ungroup'
 
-export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync, dispatchEvent, handleEvent, convertToComponent, copyPaste, getPluginData, setPluginData, updatePluginData, removeChildren, resize, ungroup }
+import { getInstanceCounterpart } from './helpers/getInstanceCounterpart'
+import { getInstanceCounterpartUsingLocation } from './helpers/getInstanceCounterpartUsingLocation'
+import { getNodeIndex } from './helpers/getNodeIndex'
+import { getNodeLocation } from './helpers/getNodeLocation'
+import { getOverrides } from './helpers/getOverrides'
+import { isInsideInstance } from './helpers/isInsideInstance'
+import { nodeToObject } from './helpers/nodeToObject'
+
+export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync, dispatchEvent, handleEvent, convertToComponent, copyPaste, getPluginData, setPluginData, updatePluginData, removeChildren, resize, ungroup, getInstanceCounterpart, getInstanceCounterpartUsingLocation, getNodeIndex, getNodeLocation, getOverrides, isInsideInstance, nodeToObject }

@@ -4,7 +4,8 @@ import { copyPaste } from './copyPaste'
  * Convert a node to a component
  */
 
-export function convertToComponent(node: SceneNode) {
+// FIXME: Typescript says detachInstance() doesn't exist on SceneNode & ChildrenMixin 
+export function convertToComponent(node: any) {
     const component = figma.createComponent()
     if (node.type === "INSTANCE") {
         node = node.detachInstance()

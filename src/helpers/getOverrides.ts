@@ -11,8 +11,6 @@ export function getOverrides(node, prop?) {
         var properties = nodeToObject(node)
         var overriddenProps = {}
 
-
-
         if (prop) {
             if (prop !== "key"
                 && prop !== "mainComponent"

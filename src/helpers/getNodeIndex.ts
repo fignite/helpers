@@ -1,7 +1,7 @@
 /**
  * Returns the index of a node
  * @param {SceneNode} node A node
- * @returns Selection of node's children
+ * @returns The index of the node
  */
 
 export function getNodeIndex(node: SceneNode): number {

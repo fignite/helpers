@@ -2,6 +2,12 @@ import { getParentInstance } from './getParentInstance'
 import { getNodeLocation } from './getNodeLocation'
 import { getNodeIndex } from './getNodeIndex'
 
+/**
+ * Provides the counterpart component node to the selected instance node. Rather than use the instance node id, it stores the location of the node and then looks for the same node in the main component.
+ * @param {SceneNode & ChildrenMixin } node A node with children
+ * @returns Returns the counterpart component node
+ */
+
 export function getInstanceCounterpartUsingLocation(node, parentInstance = getParentInstance(node), location = getNodeLocation(node, parentInstance), parentComponentNode = parentInstance?.mainComponent) {
 
     location.shift()

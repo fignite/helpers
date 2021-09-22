@@ -2,6 +2,13 @@ import { getInstanceCounterpart } from './getInstanceCounterpart'
 import { isInsideInstance } from './isInsideInstance'
 import { nodeToObject } from './nodeToObject'
 
+/**
+ * Returns the location of the node
+ * @param {SceneNode} node An instance node you want overrides for
+ * @param {SceneNode} prop A specific prop you want to get overrides for
+ * @returns Returns an object of properties. If you provide a prop it will provide a value.
+ */
+
 export function getOverrides(node, prop?) {
 
 

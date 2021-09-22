@@ -1,5 +1,12 @@
 import { getNodeIndex } from './getNodeIndex'
 
+/**
+ * Returns the location of the node
+ * @param {SceneNode} node A node you want the location of
+ * @param {SceneNode} container The container you would like to compare the node's location with
+ * @returns An array of node indexes. The first item is the container node
+ */
+
 export function getNodeLocation(node, container = figma.currentPage, location = []) {
     if (node && container) {
         if (node.id === container.id) {

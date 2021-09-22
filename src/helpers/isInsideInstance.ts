@@ -1,3 +1,9 @@
+/**
+ * Returns true if the node is nested inside an instance. It does not include the instance itself.
+ * @param {SceneNode} node A node you want to check
+ * @returns Returns true if inside an instance
+ */
+
 export function isInsideInstance(node: SceneNode): boolean {
     const parent = node.parent
 

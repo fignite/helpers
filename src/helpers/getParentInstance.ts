@@ -1,6 +1,6 @@
 /**
  * Returns the closet parent instance
- * @param {SceneNode} node An instance node you to get the parent instance for
+ * @param {SceneNode} node An specific node you want to get the parent instance for
  * @returns Returns the parent instance node
  */
 

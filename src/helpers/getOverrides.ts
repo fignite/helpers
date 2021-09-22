@@ -3,8 +3,8 @@ import { isInsideInstance } from './isInsideInstance'
 import { nodeToObject } from './nodeToObject'
 
 /**
- * Returns the location of the node
- * @param {SceneNode} node An instance node you want overrides for
+ * Returns the overrides for a specific node inside an instance
+ * @param {SceneNode} node A specific node you want overrides for
  * @param {SceneNode} prop A specific prop you want to get overrides for
  * @returns Returns an object of properties. If you provide a prop it will provide a value.
  */

@@ -9,8 +9,12 @@ import { isInsideInstance } from './isInsideInstance'
 export function getTopInstance(node) {
     if (node.type === "PAGE") return null
     if (isInsideInstance(node)) {
-        return getTopInstance(node.parent)
-    } else {
-        return node
+        if (isInsideInstance(node.parent)) {
+            return getTopInstance(node.parent)
+        }
+        else {
+            return node.parent
+        }
+        
     }
 }

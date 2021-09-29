@@ -6,7 +6,7 @@
 
 export function getParentInstance(node) {
     const parent = node.parent
-    if (node.type === "PAGE") return false
+    if (node.type === "PAGE") return undefined
 
     if (parent.type === "INSTANCE") {
         return parent

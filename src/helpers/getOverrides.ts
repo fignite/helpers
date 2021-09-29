@@ -19,6 +19,7 @@ export function getOverrides(node, prop?) {
         var overriddenProps = {}
 
         if (prop) {
+            
             if (prop !== "key"
                 && prop !== "mainComponent"
                 && prop !== "absoluteTransform"
@@ -39,15 +40,14 @@ export function getOverrides(node, prop?) {
                 && prop !== "remote"
                 && prop !== "defaultVariant"
                 && prop !== "hasMissingFont"
-                && prop !== "exportSettings") {
+                && prop !== "exportSettings"
+                && prop !== "autoRename") {
 
                 if (JSON.stringify(node[prop]) !== JSON.stringify(componentNode[prop])) {
-
                     return node[prop]
                 }
             }
         } else {
-
             for (let [key, value] of Object.entries(properties)) {
                 if (key !== "key"
                     && key !== "mainComponent"
@@ -69,7 +69,8 @@ export function getOverrides(node, prop?) {
                     && key !== "remote"
                     && key !== "defaultVariant"
                     && key !== "hasMissingFont"
-                    && key !== "exportSettings") {
+                    && key !== "exportSettings"
+                    && key !== "autoRename") {
 
                     if (JSON.stringify(properties[key]) !== JSON.stringify(componentNode[key])) {
 

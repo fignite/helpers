@@ -59,7 +59,7 @@ export function isStar(node: BaseNode | null | undefined): node is StarNode {
 }
 
 export function isImage(paint: Paint | null | undefined): paint is ImagePaint {
-  return;
+  return paint.type === "IMAGE";
 }
 
 export function isVector(

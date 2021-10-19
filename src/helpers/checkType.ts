@@ -77,3 +77,25 @@ export function isBool(
 ): node is BooleanOperationNode {
   return node.type === "BOOLEAN_OPERATION";
 }
+
+export function isShapeWithText(
+  node: BaseNode | null | undefined
+): node is ShapeWithTextNode {
+  return node.type === "SHAPE_WITH_TEXT";
+}
+
+export function isSticky(
+  node: BaseNode | null | undefined
+): node is StickyNode {
+  return node.type === "STICKY";
+}
+
+export function isStamp(node: BaseNode | null | undefined): node is StampNode {
+  return node.type === "STAMP";
+}
+
+export function isConnector(
+  node: BaseNode | null | undefined
+): node is ConnectorNode {
+  return node.type === "CONNECTOR";
+}

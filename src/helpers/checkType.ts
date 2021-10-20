@@ -6,6 +6,20 @@ When needing to check a nodes type, instead of typing out `node.type === "TYPE"`
 
 */
 
+export function isDocument(
+  node: BaseNode | null | undefined
+): node is DocumentNode {
+  return node.type === "DOCUMENT";
+}
+
+export function isPage(node: BaseNode | null | undefined): node is PageNode {
+  return node.type === "PAGE";
+}
+
+export function isSlice(node: BaseNode | null | undefined): node is SliceNode {
+  return node.type === "SLICE";
+}
+
 export function isFrame(node: BaseNode | null | undefined): node is FrameNode {
   return node.type === "FRAME";
 }

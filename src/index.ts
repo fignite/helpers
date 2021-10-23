@@ -19,5 +19,7 @@ import { getParentInstance } from './helpers/getParentInstance'
 import { getTopInstance } from './helpers/getTopInstance'
 import { isInsideInstance } from './helpers/isInsideInstance'
 import { nodeToObject } from './helpers/nodeToObject'
+import { convertToFrame } from './helpers/convertToFrame'
+import { makeComponent } from './helpers/makeComponent'
 
-export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync, dispatchEvent, handleEvent, convertToComponent, copyPaste, getPluginData, setPluginData, updatePluginData, removeChildren, resize, ungroup, getInstanceCounterpart, getInstanceCounterpartUsingLocation, getNodeDepth, getNodeIndex, getNodeLocation, getNoneGroupParent, getOverrides, getPageNode, getParentInstance, getTopInstance, isInsideInstance, nodeToObject }
+export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync, dispatchEvent, handleEvent, convertToComponent, copyPaste, getPluginData, setPluginData, updatePluginData, removeChildren, resize, ungroup, getInstanceCounterpart, getInstanceCounterpartUsingLocation, getNodeDepth, getNodeIndex, getNodeLocation, getNoneGroupParent, getOverrides, getPageNode, getParentInstance, getTopInstance, isInsideInstance, nodeToObject, convertToFrame, makeComponent }

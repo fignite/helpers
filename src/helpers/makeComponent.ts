@@ -3,6 +3,9 @@ import { convertToComponent } from './convertToComponent'
 import { ungroup } from './ungroup'
 import { getNodeIndex } from './getNodeIndex'
 
+// TODO: Remove insertChild and let user replace child same as native group method
+// TODO: Create a replaceNode helper
+
 /**
  * Makes any selection of nodes a component, the same as it happens in the editor
  * @param {SceneNode} node The node you want to make into a component

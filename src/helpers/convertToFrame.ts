@@ -1,6 +1,8 @@
 import { copyPaste } from './copyPaste'
 import { getNodeIndex } from './getNodeIndex'
 
+// TODO: Remove insertChild and let user replace child same as native group method
+
 /**
  * Converts an instance, component, or rectangle to a frame
  * @param {SceneNode} node The node you want to convert to a frame

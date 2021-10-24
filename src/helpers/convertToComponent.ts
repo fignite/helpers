@@ -3,6 +3,8 @@ import { convertToFrame } from './convertToFrame'
 import { moveChildren } from './moveChildren'
 import { getNodeIndex } from './getNodeIndex'
 
+// TODO: Remove insertChild and let user replace child same as native group method
+
 /**
  * Converts an instance, frame, or rectangle to a component
  * @param {SceneNode} node The node you want to convert to a component

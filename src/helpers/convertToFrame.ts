@@ -1,4 +1,5 @@
 import { copyPaste } from './copyPaste'
+import { getNodeIndex } from './getNodeIndex'
 
 /**
  * Converts an instance, component, or rectangle to a frame
@@ -7,6 +8,9 @@ import { copyPaste } from './copyPaste'
  */
 
 export function convertToFrame(node) {
+    let nodeIndex = getNodeIndex(node)
+    let parent = node.parent
+
     if (node.type === "INSTANCE") {
         return node.detachInstance()
     }
@@ -17,7 +21,8 @@ export function convertToFrame(node) {
         // This method preserves plugin data and relaunch data
         let frame = node.createInstance().detachInstance()
         parent.appendChild(frame)
-        copyPaste(node, frame, {include: ['x', 'y']})
+        copyPaste(node, frame, { include: ['x', 'y'] })
+        parent.insertChild(nodeIndex, frame)
         node.remove()
         return frame
     }
@@ -27,6 +32,7 @@ export function convertToFrame(node) {
         // FIXME: Add this into copyPaste helper
         frame.resizeWithoutConstraints(node.width, node.height)
         copyPaste(node, frame)
+        parent.insertChild(nodeIndex, frame)
         node.remove()
         return frame
     }

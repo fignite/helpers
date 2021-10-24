@@ -10,7 +10,7 @@ import { getNodeIndex } from './getNodeIndex'
  */
 
 // FIXME: Typescript says detachInstance() doesn't exist on SceneNode & ChildrenMixin 
-export function convertToComponent(node: SceneNode & ChildrenMixin) {
+export function convertToComponent(node) {
     const component = figma.createComponent()
     let parent = node.parent
     let nodeIndex = getNodeIndex(node)

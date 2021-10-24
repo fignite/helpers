@@ -54,6 +54,12 @@ Install `np` for publishing.
 npm install --global np
 ```
 
+Build module before publishing
+
+```
+npm run build
+```
+
 Publish by running `np`
 
 ```

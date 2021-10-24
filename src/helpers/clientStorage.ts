@@ -16,15 +16,12 @@ export async function updateClientStorageAsync(key, callback) {
 
     data = callback(data)
 
-    await figma.clientStorage.setAsync(key, data)
-
-
     // What should happen if user doesn't return anything in callback?
     if (!data) {
         data = null
     }
-
-    // node.setPluginData(key, JSON.stringify(data))
-
-    return data
+    else {
+        figma.clientStorage.setAsync(key, data)
+        return data
+    } 
 }

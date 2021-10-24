@@ -3,8 +3,6 @@ import { convertToComponent } from './convertToComponent'
 import { ungroup } from './ungroup'
 import { getNodeIndex } from './getNodeIndex'
 
-// TODO: Create new selection
-
 /**
  * Makes any selection of nodes a component, the same as it happens in the editor
  * @param {SceneNode} node The node you want to make into a component

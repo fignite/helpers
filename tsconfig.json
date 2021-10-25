@@ -3,10 +3,11 @@
     "declaration": true,
     "target": "es2017",
     "moduleResolution": "node",
+    "types": ["node"],
     "typeRoots": [
         "./node_modules/@types",
         "./node_modules/@figma"
     ]
   },
-  "exclude": ["dist", "node_modules", "__tests__"]
+  "exclude": ["dist", "node_modules", "__tests__", "jest"]
 }

@@ -1,4 +1,4 @@
-import { copyPaste } from '../src/helpers/copyPaste';
+import { copyPaste } from '../src/index';
 
 // We create nodes here so that id is consistent across all tests
 var sourceNode = figma.createRectangle()

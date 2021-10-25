@@ -1,4 +1,4 @@
-import { ungroup } from '../src/helpers/ungroup';
+import { ungroup } from '../src/index';
 
 var nodes = [
     figma.createRectangle(),

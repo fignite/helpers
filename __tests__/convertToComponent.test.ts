@@ -1,4 +1,4 @@
-import { convertToComponent } from '../src/helpers/convertToComponent';
+import { convertToComponent } from '../src/index';
 
 var frame = figma.createFrame()
 

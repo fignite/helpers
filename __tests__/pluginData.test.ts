@@ -1,4 +1,4 @@
-import { getPluginData, setPluginData, updatePluginData } from '../src/helpers/pluginData';
+import { getPluginData, setPluginData, updatePluginData } from '../src/index';
 
 var node = figma.createRectangle()
 

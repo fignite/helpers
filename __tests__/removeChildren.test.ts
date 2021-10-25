@@ -1,4 +1,4 @@
-import { removeChildren } from '../src/helpers/removeChildren';
+import { removeChildren } from '../src/index';
 
 var frame = figma.createFrame()
 

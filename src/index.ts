@@ -24,6 +24,6 @@ export * from './helpers/pluginData';
 export * from './helpers/removeChildren';
 export * from './helpers/replace';
 export * from './helpers/resize';
-export * from './helpers/uiMessageHandler';
+//export * from './helpers/uiMessageHandler';
 export * from './helpers/ungroup';
 export * from './interface/prompt';

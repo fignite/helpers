@@ -1,4 +1,4 @@
-import { getNodeIndex } from '../src/helpers/getNodeIndex';
+import { getNodeIndex } from '../src/index';
 
 var rect1 = figma.createRectangle()
 var rect2 = figma.createRectangle()

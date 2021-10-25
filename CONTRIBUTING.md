@@ -55,7 +55,7 @@ test.todo(`Ungroup nodes`)
 
 ### Testing locally
 
-To test your help works locally you can use `npm link`.
+To test your helper works locally you can use `npm link`.
 
 First create a link from your fork of `@figles/helpers`.
 

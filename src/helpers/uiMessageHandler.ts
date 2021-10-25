@@ -5,7 +5,7 @@ const eventListeners: { action: string; callback: Function }[] = [];
  * @param {string} action Name of the event to send to the plugin code 
  * @param data Data to send to the plugin code
  */
-export const dispatchEvent = (action: string, data?: any) => {
+export const UiDispatchEvent = (action: string, data?: any) => {
 	parent.postMessage({ pluginMessage: { action, data } }, '*');
 };
 /**
@@ -13,7 +13,7 @@ export const dispatchEvent = (action: string, data?: any) => {
  * @param {string} action Name of the event to handle 
  * @param {Function} callback Function to run on event
  */
-export const handleEvent = (action: string, callback: Function) => {
+export const UiHandleEvent = (action: string, callback: Function) => {
 	eventListeners.push({ action, callback });
 };
 window.onmessage = event => {

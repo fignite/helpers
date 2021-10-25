@@ -7,10 +7,10 @@ import { copyPaste } from './copyPaste'
 export function convertToComponent(node: SceneNode) {
     const component = figma.createComponent()
     if (node.type === "INSTANCE") {
-        node = node.detachInstance()
+        node = (node as InstanceNode).detachInstance()
     }
     component.resizeWithoutConstraints(node.width, node.height)
-    for (const child of node.children) {
+    for (const child of (node as ChildrenMixin).children) {
         component.appendChild(child)
     }
     copyPaste(node, component)

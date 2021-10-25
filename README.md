@@ -16,4 +16,6 @@ Include in your `main` code
 import { ungroup } from '@figlets/helpers'
 ```
 
-I've you'd like to contribute, please see the [contributing](/CONTRIBUTING.md) guidelines.
+## Contributing
+
+If you'd like to contribute, please see the [contributing](/CONTRIBUTING.md) guidelines.

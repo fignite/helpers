@@ -21,5 +21,6 @@ import { isInsideInstance } from './helpers/isInsideInstance'
 import { nodeToObject } from './helpers/nodeToObject'
 import { convertToFrame } from './helpers/convertToFrame'
 import { makeComponent } from './helpers/makeComponent'
+import { replace } from './helpers/replace'
 
-export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync, dispatchEvent, handleEvent, convertToComponent, copyPaste, getPluginData, setPluginData, updatePluginData, removeChildren, resize, ungroup, getInstanceCounterpart, getInstanceCounterpartUsingLocation, getNodeDepth, getNodeIndex, getNodeLocation, getNoneGroupParent, getOverrides, getPageNode, getParentInstance, getTopInstance, isInsideInstance, nodeToObject, convertToFrame, makeComponent }
+export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync, dispatchEvent, handleEvent, convertToComponent, copyPaste, getPluginData, setPluginData, updatePluginData, removeChildren, resize, ungroup, getInstanceCounterpart, getInstanceCounterpartUsingLocation, getNodeDepth, getNodeIndex, getNodeLocation, getNoneGroupParent, getOverrides, getPageNode, getParentInstance, getTopInstance, isInsideInstance, nodeToObject, convertToFrame, makeComponent, replace }

@@ -159,6 +159,9 @@ type Callback = (prop: string) => void;
 * @returns A node or object with the properties copied over
 */
 
+// FIXME: When an empty objet is provided, copy over all properties including width and height
+// FIXME: Don't require a setter in order to copy property. Should be able to copy from an object literal for example.
+
 export function copyPaste(source: any, target: {} | BaseNode, ...args: (Options | Callback)[]) {
 
     var targetIsEmpty

@@ -3,7 +3,6 @@ import { convertToComponent } from './convertToComponent'
 import { ungroup } from './ungroup'
 import { getNodeIndex } from './getNodeIndex'
 
-// TODO: Remove insertChild and let user replace child same as native group method
 // TODO: Create a replaceNode helper
 
 /**
@@ -14,12 +13,17 @@ import { getNodeIndex } from './getNodeIndex'
 
 export function makeComponent(nodes) {
 
+    // If not given an array, put into an array
+    if (!Array.isArray(nodes)) {
+        nodes = [nodes]
+    }
+
     let parent = nodes[0].parent
     
-    if (nodes.length === 1 && nodes[0].type === "FRAME") {
-        let nodeIndex = getNodeIndex(nodes[0])
+    if (nodes.length === 1 && (nodes[0].type === "FRAME" || nodes[0].type === "GROUP")) {
+        // let nodeIndex = getNodeIndex(nodes[0])
         let component = convertToComponent(nodes[0])
-        parent.insertChild(nodeIndex, component)
+        // parent.insertChild(nodeIndex, component)
         return component
     }
     else {
@@ -30,12 +34,10 @@ export function makeComponent(nodes) {
         group.x = 0
         group.y = 0
         
-
+        console.log("where the children go")
         if (nodes.length === 1) {
             component.name = nodes[0].name
         }
-
-        parent.insertChild(getNodeIndex(group), component)
         
         ungroup(group, component)
 

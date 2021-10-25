@@ -1,9 +1,6 @@
 import { copyPaste } from './copyPaste'
 import { convertToFrame } from './convertToFrame'
 import { moveChildren } from './moveChildren'
-import { getNodeIndex } from './getNodeIndex'
-
-// TODO: Remove insertChild and let user replace child same as native group method
 
 /**
  * Converts an instance, frame, or rectangle to a component
@@ -14,8 +11,6 @@ import { getNodeIndex } from './getNodeIndex'
 // FIXME: Typescript says detachInstance() doesn't exist on SceneNode & ChildrenMixin 
 export function convertToComponent(node) {
     const component = figma.createComponent()
-    let parent = node.parent
-    let nodeIndex = getNodeIndex(node)
 
     node = convertToFrame(node)
 
@@ -23,7 +18,7 @@ export function convertToComponent(node) {
     component.resizeWithoutConstraints(node.width, node.height)
     copyPaste(node, component)
     moveChildren(node, component)
-    parent.insertChild(nodeIndex, component)
+
     node.remove()
     return component
 }

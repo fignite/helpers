@@ -18,7 +18,7 @@ import {
 import { removeChildren } from "./helpers/removeChildren";
 import { resize } from "./helpers/resize";
 import { ungroup } from "./helpers/ungroup";
-
+import { hexToPaints } from "./helpers/hexToPaints";
 export {
   getClientStorageAsync,
   setClientStorageAsync,
@@ -35,4 +35,5 @@ export {
   removeChildren,
   resize,
   ungroup,
+  hexToPaints
 };

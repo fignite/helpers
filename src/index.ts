@@ -1,12 +1,13 @@
 export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync } from './helpers/clientStorage'
-export { dispatchEvent, handleEvent } from './helpers/codeMessageHandler'
+export { codeDispatchEvent, codeHandleEvent } from './helpers/codeMessageHandler'
+export { UiDispatchEvent, UiHandleEvent } from './helpers/UiMessageHandler'
 export { convertToComponent } from './helpers/convertToComponent'
 export { copyPaste } from './helpers/copyPaste'
 export { getPluginData, setPluginData, updatePluginData } from './helpers/pluginData'
 export { removeChildren } from './helpers/removeChildren'
 export { resize } from './helpers/resize'
 export { ungroup } from './helpers/ungroup'
-
+export { hexToPaints, hexToRgb } from "./helpers/hexToPaints"
 export { getInstanceCounterpart } from './helpers/getInstanceCounterpart'
 export { getInstanceCounterpartUsingLocation } from './helpers/getInstanceCounterpartUsingLocation'
 export { getNodeDepth } from './helpers/getNodeDepth'

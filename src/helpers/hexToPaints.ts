@@ -17,7 +17,8 @@
        if(color == null){throw('Color is null')}else{
         let paint: Paint = {
             type: "SOLID",
-            color
+            color: color.color,
+            opacity: color.opacity
         }
         return paint
       }
@@ -28,11 +29,26 @@
 
 
 export function hexToRgb(hex) {
-    hex =  hex.length < 6 ? hex.replace(new RegExp("([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])"), "$1$1$2$2$3$3") : hex;
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+    hex = hex.replace('#','')
+    hex.length == 3 ? hex += "F" : null;
+
+    hex.length == 4 ? hex = hex.replace(new RegExp("([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])"), "$1$1$2$2$3$3$4$4") : null;
+
+    hex.length == 6 ? hex += "FF" : null;
+
+
+    console.log(hex)
+
+
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
     return result ? {
-      r: parseInt(result[1], 16)/255,
-      g: parseInt(result[2], 16)/255,
-      b: parseInt(result[3], 16)/255
+      color: {
+        r: parseInt(result[1], 16)/255,
+        g: parseInt(result[2], 16)/255,
+        b: parseInt(result[3], 16)/255
+      },
+      opacity: parseFloat((parseInt(result[4], 16)/255).toFixed(2))
     } : null;
   }

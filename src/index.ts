@@ -1,6 +1,5 @@
 export { getClientStorageAsync, setClientStorageAsync, updateClientStorageAsync } from './helpers/clientStorage'
-export { codeDispatchEvent, codeHandleEvent } from './helpers/codeMessageHandler'
-export { UiDispatchEvent, UiHandleEvent } from './helpers/UiMessageHandler'
+export { dispatchEvent, handleEvent } from './helpers/codeMessageHandler'
 export { convertToComponent } from './helpers/convertToComponent'
 export { copyPaste } from './helpers/copyPaste'
 export { getPluginData, setPluginData, updatePluginData } from './helpers/pluginData'

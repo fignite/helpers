@@ -1,5 +1,5 @@
 {
-  "name": "@figlets/helpers",
+  "name": "@fignite/helpers",
   "version": "0.0.0-alpha.9",
   "description": "A collection of helpers for Figma plugins",
   "main": "dist/index.js",
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Figlets/helpers.git"
+    "url": "git+https://github.com/fignite/helpers.git"
   },
   "keywords": [
     "figma",
@@ -42,9 +42,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Figlets/Figlets/issues"
+    "url": "https://github.com/fignite/helpers/issues"
   },
-  "homepage": "https://github.com/Figlets/Figlets#readme",
+  "homepage": "https://github.com/fignite/helpers#readme",
   "dependencies": {
     "babelrc-rollup": "^3.0.0",
     "require-dir": "^1.2.0",

@@ -62,7 +62,7 @@ To test your helper works locally you can use `npm link`.
 First create a link from your fork of `@figles/helpers` and run the dev command.
 
 ```bash
-cd ~/Sites/figlets-helpers
+cd ~/Sites/fignite-helpers
 npm link
 npm run dev
 ```
@@ -72,7 +72,7 @@ Then in your own project import the helper and check that it works by linking it
 ```js
 // ~/Sites/myPlugin/code.ts
 
-import { myHelper } from '@figlets/helpers'
+import { myHelper } from '@fignite/helpers'
 
 // ...
 
@@ -83,5 +83,5 @@ Linking locally
 
 ```bash
 cd ~/Sites/myPlugin
-npm link @figlets/helpers
+npm link @fignite/helpers
 ```

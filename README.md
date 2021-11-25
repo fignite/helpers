@@ -1,4 +1,4 @@
-# Figlets Helpers
+# fignite/helpers
 
 A collection of helpers for Figma plugins and widgets.
 
@@ -7,13 +7,13 @@ A collection of helpers for Figma plugins and widgets.
 Install using the following
 
 ```bash
-npm install @figlets/helpers
+npm install @fignite/helpers
 ```
 
 Include in your `main` code
 
 ```js
-import { ungroup } from '@figlets/helpers'
+import { ungroup } from '@fignite/helpers'
 ```
 
 ## Contributing

@@ -3,6 +3,7 @@
     "declaration": true,
     "target": "es2017",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "typeRoots": [
         "./node_modules/@types",
         "./node_modules/@figma"

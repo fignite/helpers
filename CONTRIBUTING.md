@@ -8,9 +8,8 @@ We welcome your contributions to this library, please read the below to see how 
 To contribute a helper to the library please fork the `main` branch, follow the steps below and raise a pull request. If you need any help just let us know in your pull request.
  
 1. Create a file for your helper in `src/helpers/`
-2. Add your helper to the `src/index.ts` file
-3. Create a unit test in `__tests__`
-4. Test that it works (see below)
+2. Create a unit test in `__tests__`
+3. Test that it works (see below)
 
 
 ### Creating a unit test

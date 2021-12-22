@@ -59,7 +59,7 @@ test.todo(`Does some cool stuff with rectangles`)
 
 To test your helper works locally you can use `npm link`.
 
-First create a link from your fork of `@figles/helpers` and run the dev command.
+First create a link from your fork of `@fignite/helpers` and run the dev command.
 
 ```bash
 cd ~/Sites/fignite-helpers

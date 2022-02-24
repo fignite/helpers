@@ -10,8 +10,15 @@
  * @param {string} key  The key under which data is stored 
  * @returns Plugin Data
  */
-export function getPluginData(node: BaseNode, key: string) {
-    return JSON.parse(node.getPluginData(key))
+ export function getPluginData(node, key) {
+	var data
+	if (node.getPluginData(key)) {
+		data = JSON.parse(node.getPluginData(key))
+	}
+	else {
+		data = undefined
+	}
+	return data
 }
 
 /**

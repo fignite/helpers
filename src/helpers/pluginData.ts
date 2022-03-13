@@ -8,13 +8,33 @@
  * @param {string} key  The key under which data is stored
  * @returns Plugin Data
  */
-export function getPluginData(node, key) {
+export function getPluginData(node, key, opts?) {
   var data;
-  if (node.getPluginData(key)) {
-    data = JSON.parse(node.getPluginData(key));
+
+  data = node.getPluginData(key);
+
+  if (data) {
+    if (data.startsWith(">>>")) {
+      data = data;
+    } else {
+      data = JSON.parse(data);
+    }
   } else {
     data = undefined;
   }
+
+  if (typeof data === "string" && data.startsWith(">>>")) {
+    data = data.slice(3);
+
+    var string =
+      `(() => {
+            return ` +
+      data +
+      `
+            })()`;
+    data = eval(string);
+  }
+
   return data;
 }
 
@@ -25,7 +45,11 @@ export function getPluginData(node, key) {
  * @param {any} data Data to be stoed
  */
 export function setPluginData(node: BaseNode, key: string, data: any) {
-  node.setPluginData(key, JSON.stringify(data));
+  if (typeof data === "string" && data.startsWith(">>>")) {
+    node.setPluginData(key, data);
+  } else {
+    node.setPluginData(key, JSON.stringify(data));
+  }
 }
 
 export function updatePluginData(

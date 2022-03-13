@@ -14,7 +14,6 @@ export function setDocumentData(key: string, data: any) {
  * @param {String} key A key to store data under
  */
 export function getDocumentData(key: string) {
-  console.log("getDocumentData");
   return getPluginData(figma.root, key);
 }
 

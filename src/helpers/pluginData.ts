@@ -14,7 +14,7 @@ export function getPluginData(node, key, opts?) {
   data = node.getPluginData(key);
 
   if (data) {
-    if (data.startsWith(">>>")) {
+    if (typeof data === "string" && data.startsWith(">>>")) {
       data = data;
     } else {
       data = JSON.parse(data);

@@ -4,13 +4,8 @@
  */
 
 export function removeChildren(node: SceneNode & ChildrenMixin) {
-
-    var length = node.children.length
-
-    if (length > 0) {
-        for (let i = 0; i < length; i++) {
-            node.children[0].remove()
-        }
-    }
-
+  let length = node.children.length;
+  for (let i = length - 1; i >= 0; i--) {
+    node.children[i].remove();
+  }
 }

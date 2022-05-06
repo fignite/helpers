@@ -3,7 +3,6 @@ import { updatePluginData, getPluginData } from "./pluginData";
 
 /**
  * Returns any remote files used by the plugin. It merges any files stored on clientStorage with those collected by the plugin on the file. It also tries to update the file name.
- * @param {any} fileData Any data you want to be associated with the file
  * @returns An array of files
  */
 

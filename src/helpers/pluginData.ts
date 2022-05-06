@@ -47,8 +47,10 @@ export function getPluginData(node, key, opts?) {
 export function setPluginData(node: BaseNode, key: string, data: any) {
   if (typeof data === "string" && data.startsWith(">>>")) {
     node.setPluginData(key, data);
+    return data;
   } else {
     node.setPluginData(key, JSON.stringify(data));
+    return JSON.stringify(data);
   }
 }
 

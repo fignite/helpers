@@ -7,12 +7,23 @@ import { genUID } from "./genUID";
  * @returns An array of files
  */
 
+function addUniqueToArray(object, array) {
+  // // Only add new template if unique
+  var index = array.findIndex((x) => x.id === object.id);
+  index === -1 ? array.push(object) : console.log("object already exists");
+
+  return array;
+}
+
 function File(data?) {
   this.id = getDocumentData("fileId") || setDocumentData("fileId", genUID());
   // TODO: When getPluginData has been updated to evaluate expressions at runtime replace with below
   // this.name = `{figma.getNodeById("0:1").name}`
   this.name = figma.root.name;
-  if (data) this.data = data;
+  if (data) {
+    this.data = data;
+    setDocumentData("fileData", data);
+  }
 }
 
 export async function getRecentFilesAsync(fileData?): Promise<object[]> {
@@ -30,11 +41,15 @@ export async function getRecentFilesAsync(fileData?): Promise<object[]> {
     if (recentFiles.length === 0) {
       if (fileData.length > 0) recentFiles.push(newFile);
     } else {
+      // If unique then add to array
+      addUniqueToArray(newFile, recentFiles);
+
+      // If not, then update
       recentFiles.filter((item) => {
         if (item.id === newFile.id) {
-          item.data = fileData;
-        } else {
-          if (fileData.length > 0) recentFiles.push(newFile);
+          item.name = newFile.name;
+          item.data = newFile.data;
+          setDocumentData("fileData", newFile.data);
         }
       });
     }

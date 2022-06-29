@@ -14,12 +14,10 @@ export async function getRemoteFilesAsync(): Promise<object[]> {
 
     // Merge recentFiles into remoteFiles (because we need to add them if they don't exist, and update them if they do)
     if (recentFiles.length > 0) {
-      // if (!remoteFiles) remoteFiles = []
-
       // I think this is a method of merging files, maybe removing duplicates?
-      var ids = new Set(remoteFiles.map((file) => file.id));
+      var ids = new Set(recentFiles.map((file) => file.id));
       var merged = [
-        ...remoteFiles,
+        ...recentFiles,
         ...recentFiles.filter((file) => !ids.has(file.id)),
       ];
 

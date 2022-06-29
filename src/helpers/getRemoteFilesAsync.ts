@@ -14,10 +14,21 @@ export async function getRemoteFilesAsync(): Promise<object[]> {
 
     // Merge recentFiles into remoteFiles (because we need to add them if they don't exist, and update them if they do)
     if (recentFiles.length > 0) {
+      // Update all remote files with recent files
+      for (let i = 0; i < remoteFiles.length; i++) {
+        var remoteFile = remoteFiles[i];
+        for (let x = 0; x < recentFiles.length; x++) {
+          var recentFile = recentFiles[x];
+          if (recentFile.id === remoteFile.id) {
+            remoteFile = recentFile;
+          }
+        }
+      }
+
       // I think this is a method of merging files, maybe removing duplicates?
-      var ids = new Set(recentFiles.map((file) => file.id));
+      var ids = new Set(remoteFiles.map((file) => file.id));
       var merged = [
-        ...recentFiles,
+        ...remoteFiles,
         ...recentFiles.filter((file) => !ids.has(file.id)),
       ];
 
@@ -34,25 +45,27 @@ export async function getRemoteFilesAsync(): Promise<object[]> {
     if (remoteFiles.length > 0) {
       for (var i = 0; i < remoteFiles.length; i++) {
         var file = remoteFiles[i];
-        figma
-          .importComponentByKeyAsync(file.data[0].component.key)
-          .then((component) => {
-            var remoteTemplate = getPluginData(component, "template");
-            updatePluginData(figma.root, "remoteFiles", (remoteFiles) => {
-              remoteFiles.map((file) => {
-                if (file.id === remoteTemplate.file.id) {
-                  file.name = remoteTemplate.file.name;
-                }
+        if (file.data[0]) {
+          figma
+            .importComponentByKeyAsync(file.data[0].component.key)
+            .then((component) => {
+              var remoteTemplate = getPluginData(component, "template");
+              updatePluginData(figma.root, "remoteFiles", (remoteFiles) => {
+                remoteFiles.map((file) => {
+                  if (file.id === remoteTemplate.file.id) {
+                    file.name = remoteTemplate.file.name;
+                  }
+                });
+                return remoteFiles;
               });
-              return remoteFiles;
+            })
+            .catch((error) => {
+              console.log(error);
+              // FIXME: Do I need to do something here if component is deleted?
+              // FIXME: Is this the wrong time to check if component is published?
+              // figma.notify("Please check component is published")
             });
-          })
-          .catch((error) => {
-            console.log(error);
-            // FIXME: Do I need to do something here if component is deleted?
-            // FIXME: Is this the wrong time to check if component is published?
-            // figma.notify("Please check component is published")
-          });
+        }
       }
     }
     return remoteFiles;

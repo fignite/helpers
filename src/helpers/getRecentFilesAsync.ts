@@ -16,7 +16,9 @@ function addUniqueToArray(object, array) {
 }
 
 function File(data?) {
-  this.id = getDocumentData("fileId") || setDocumentData("fileId", genUID());
+  this.id =
+    getDocumentData("fileId") ||
+    setDocumentData("fileId", genUID()).replace(/['"]+/g, "");
   // TODO: When getPluginData has been updated to evaluate expressions at runtime replace with below
   // this.name = `{figma.getNodeById("0:1").name}`
   this.name = figma.root.name;

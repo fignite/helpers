@@ -10,7 +10,7 @@ import { genUID } from "./genUID";
 function addUniqueToArray(object, array) {
   // // Only add new template if unique
   var index = array.findIndex((x) => x.id === object.id);
-  index === -1 ? array.push(object) : console.log("object already exists");
+  index === -1 ? array.push(object) : false;
 
   return array;
 }
@@ -47,11 +47,16 @@ export async function getRecentFilesAsync(fileData?): Promise<object[]> {
       addUniqueToArray(newFile, recentFiles);
 
       // If not, then update
-      recentFiles.filter((item) => {
+      recentFiles.filter((item, i) => {
         if (item.id === newFile.id) {
           item.name = newFile.name;
           item.data = newFile.data;
           setDocumentData("fileData", newFile.data);
+
+          // If data no longer exists, delete the file
+          if (!fileData || (Array.isArray(fileData) && fileData.length === 0)) {
+            recentFiles.splice(i, 1);
+          }
         }
       });
     }

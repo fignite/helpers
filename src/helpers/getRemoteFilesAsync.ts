@@ -20,7 +20,7 @@ export async function getRemoteFilesAsync(): Promise<object[]> {
         for (let x = 0; x < recentFiles.length; x++) {
           var recentFile = recentFiles[x];
           if (recentFile.id === remoteFile.id) {
-            remoteFile = recentFile;
+            remoteFiles[i] = recentFile;
           }
         }
       }

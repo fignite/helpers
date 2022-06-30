@@ -25,6 +25,8 @@ function File(data?) {
   if (data) {
     this.data = data;
     setDocumentData("fileData", data);
+  } else {
+    this.data = getDocumentData("fileData");
   }
 }
 
@@ -51,7 +53,7 @@ export async function getRecentFilesAsync(fileData?): Promise<object[]> {
         if (item.id === newFile.id) {
           item.name = newFile.name;
           item.data = newFile.data;
-          setDocumentData("fileData", newFile.data);
+          setDocumentData("fileData", fileData);
 
           // If data no longer exists, delete the file
           if (!fileData || (Array.isArray(fileData) && fileData.length === 0)) {

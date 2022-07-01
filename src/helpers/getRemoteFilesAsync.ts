@@ -2,43 +2,53 @@ import { getClientStorageAsync } from "./clientStorage";
 import { updatePluginData, getPluginData } from "./pluginData";
 
 /**
- * Returns any remote files used by the plugin. It merges any files stored on clientStorage with those collected by the plugin on the file. It also tries to update the file name.
+ * Returns any remote files associated with the current file used by the plugin and keeps the name and data up to date.
  * @returns An array of files
  */
 
-export async function getRemoteFilesAsync(): Promise<object[]> {
+export async function getRemoteFilesAsync(fileId?): Promise<object[]> {
   var recentFiles = await getClientStorageAsync("recentFiles");
 
   return updatePluginData(figma.root, "remoteFiles", (remoteFiles) => {
     remoteFiles = remoteFiles || [];
 
-    // Merge recentFiles into remoteFiles (because we need to add them if they don't exist, and update them if they do)
+    // Add new file to remote files
+    if (fileId) {
+      let recentFile = recentFiles.find((file) => (file.id = fileId));
+      remoteFiles.push(recentFile);
+    }
+
+    // Update all remote files with data from recent files
     if (recentFiles.length > 0) {
-      // Update all remote files with recent files
       for (let i = 0; i < remoteFiles.length; i++) {
         var remoteFile = remoteFiles[i];
         for (let x = 0; x < recentFiles.length; x++) {
           var recentFile = recentFiles[x];
+          // Update existing remote files
           if (recentFile.id === remoteFile.id) {
             remoteFiles[i] = recentFile;
           }
         }
       }
 
-      // I think this is a method of merging files, maybe removing duplicates?
-      var ids = new Set(remoteFiles.map((file) => file.id));
-      var merged = [
-        ...remoteFiles,
-        ...recentFiles.filter((file) => !ids.has(file.id)),
-      ];
+      // // I think this is a method of merging files, maybe removing duplicates?
+      // var ids = new Set(remoteFiles.map((file) => file.id));
+      // var merged = [
+      //   ...remoteFiles,
+      //   ...recentFiles.filter((file) => !ids.has(file.id)),
+      // ];
+
+      // // Exclude current file (because we want remote files to this file only)
+      // merged = merged.filter((file) => {
+      //   return !(file.id === getPluginData(figma.root, "fileId"));
+      // });
 
       // Exclude current file (because we want remote files to this file only)
-      merged = merged.filter((file) => {
+      remoteFiles = remoteFiles.filter((file) => {
         return !(file.id === getPluginData(figma.root, "fileId"));
       });
-
-      remoteFiles = merged;
     }
+    // }
 
     // Then I check to see if the file name has changed and make sure it's up to date
     // For now I've decided to include unpublished components in remote files, to act as a reminder to people to publish them

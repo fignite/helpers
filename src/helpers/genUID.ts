@@ -13,6 +13,10 @@ export function genUID() {
   //   })
   //   .join("");
   return `${
-    figma.currentUser.id + figma.currentUser.sessionId + new Date().valueOf()
+    figma.currentUser.id +
+    "-" +
+    figma.currentUser.sessionId +
+    "-" +
+    new Date().valueOf()
   }`;
 }

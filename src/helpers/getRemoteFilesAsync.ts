@@ -14,7 +14,7 @@ export async function getRemoteFilesAsync(fileId?): Promise<object[]> {
 
     // Add new file to remote files
     if (fileId) {
-      let recentFile = recentFiles.find((file) => (file.id = fileId));
+      let recentFile = recentFiles.find((file) => file.id === fileId);
       remoteFiles.push(recentFile);
     }
 

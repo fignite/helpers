@@ -14,8 +14,12 @@ export async function getRemoteFilesAsync(fileId?): Promise<object[]> {
 
     // Add new file to remote files
     if (fileId) {
+      let fileAlreadyExists = remoteFiles.find((file) => file.id === fileId);
       let recentFile = recentFiles.find((file) => file.id === fileId);
-      remoteFiles.push(recentFile);
+
+      if (!fileAlreadyExists) {
+        remoteFiles.push(recentFile);
+      }
     }
 
     // Update all remote files with data from recent files
@@ -78,6 +82,20 @@ export async function getRemoteFilesAsync(fileId?): Promise<object[]> {
         }
       }
     }
+    return remoteFiles;
+  });
+}
+
+export function removeRemoteFile(fileId): object[] {
+  return updatePluginData(figma.root, "remoteFiles", (remoteFiles) => {
+    let fileIndex = remoteFiles.findIndex((file) => {
+      return file.id === fileId;
+    });
+
+    if (fileIndex !== -1) {
+      remoteFiles.splice(fileIndex, 1);
+    }
+
     return remoteFiles;
   });
 }

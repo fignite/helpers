@@ -34,6 +34,8 @@ function File(data?) {
   // TODO: When getPluginData has been updated to evaluate expressions at runtime replace with below
   // this.name = `{figma.getNodeById("0:1").name}`
   this.name = figma.root.name;
+  this.firstVisited = new Date().toISOString();
+  this.lastVisited = new Date().toISOString();
   if (data) {
     this.data = data;
     setDocumentData("fileData", data);
@@ -42,7 +44,8 @@ function File(data?) {
   }
 }
 
-export async function getRecentFilesAsync(fileData?): Promise<object[]> {
+export async function getRecentFilesAsync(fileData?, opts?): Promise<object[]> {
+  opts = opts || {};
   // Should it include an option top only add published components/data?
   // const publishedComponents = await getPublishedComponents(fileData)
 
@@ -86,32 +89,62 @@ export async function getRecentFilesAsync(fileData?): Promise<object[]> {
         // If unique then add to array
         addUniqueToArray(recentFiles, currentFile);
 
-        // If not, then update
-        recentFiles.filter((item, i) => {
-          if (item.id === currentFile.id) {
-            item.name = currentFile.name;
-            item.data = currentFile.data;
-            setDocumentData("fileData", fileData);
+        if (recentFiles.length > 0) {
+          // If not, then update
+          recentFiles.filter((item, i) => {
+            if (item.id === currentFile.id) {
+              item.name = currentFile.name;
+              item.lastVisited = new Date().toISOString();
+              item.data = currentFile.data;
+              setDocumentData("fileData", fileData);
 
-            // If data no longer exists, delete the file
-            if (
-              !fileData ||
-              (Array.isArray(fileData) && fileData.length === 0)
-            ) {
-              recentFiles.splice(i, 1);
+              // If data no longer exists, delete the file
+              if (
+                !fileData ||
+                (Array.isArray(fileData) && fileData.length === 0)
+              ) {
+                recentFiles.splice(i, 1);
+              }
             }
+          });
+
+          // Sort by firstVisitedByPlugin
+
+          recentFiles.sort((a, b) => {
+            if (a.lastVisited === b.lastVisited) return 0;
+
+            return a.lastVisited > b.lastVisited ? -1 : 1;
+          });
+
+          if (opts.expire) {
+            // Remove files which are out of date
+            recentFiles.map((file) => {
+              let fileTimestamp = new Date(file.lastVisited).valueOf();
+              let currentTimestamp = new Date().valueOf();
+
+              // if (fileTimestamp < currentTimestamp - daysToMilliseconds(7)) {
+
+              if (fileTimestamp < currentTimestamp - opts.expire) {
+                let fileIndex = recentFiles.indexOf(file);
+                if (fileIndex !== -1) {
+                  recentFiles.splice(fileIndex, 1);
+                }
+              }
+            });
           }
-        });
+        }
       }
 
       return recentFiles;
     }
   );
 
-  // Exclude current file
-  recentFiles = recentFiles.filter((file) => {
-    return !(file.id === getPluginData(figma.root, "fileId"));
-  });
+  if (recentFiles.length > 0) {
+    // Exclude current file
+    recentFiles = recentFiles.filter((file) => {
+      return !(file.id === getPluginData(figma.root, "fileId"));
+    });
+  }
 
   return recentFiles;
 }

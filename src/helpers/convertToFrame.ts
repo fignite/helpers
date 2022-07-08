@@ -1,4 +1,4 @@
-import { copyPaste } from './copyPaste'
+import { copyPaste } from "./copyPaste";
 
 /**
  * Converts an instance, component, or rectangle to a frame
@@ -7,39 +7,37 @@ import { copyPaste } from './copyPaste'
  */
 
 export function convertToFrame(node) {
+  if (node.type === "INSTANCE") {
+    return node.detachInstance();
+  }
 
-    if (node.type === "INSTANCE") {
-        return node.detachInstance()
-    }
+  if (node.type === "COMPONENT") {
+    let parent = node.parent;
 
-    if (node.type === "COMPONENT") {
-        let parent = node.parent
-        
-        // This method preserves plugin data and relaunch data
-        console.log("hello")
-        let frame = node.createInstance().detachInstance()
-        parent.appendChild(frame)
-        copyPaste(node, frame, { include: ['x', 'y'] })
+    // This method preserves plugin data and relaunch data
+    let frame = node.createInstance().detachInstance();
+    parent.appendChild(frame);
+    copyPaste(node, frame, { include: ["x", "y"] });
 
-        // Treat like native method
-        figma.currentPage.appendChild(frame)
-        node.remove()
-        return frame
-    }
+    // Treat like native method
+    figma.currentPage.appendChild(frame);
+    node.remove();
+    return frame;
+  }
 
-    if (node.type === "RECTANGLE" || node.type === "GROUP") {
-        let frame = figma.createFrame()
+  if (node.type === "RECTANGLE" || node.type === "GROUP") {
+    let frame = figma.createFrame();
 
-        // FIXME: Add this into copyPaste helper
-        frame.resizeWithoutConstraints(node.width, node.height)
-        copyPaste(node, frame)
-        
-        node.remove()
-        return frame
-    }
+    // FIXME: Add this into copyPaste helper
+    frame.resizeWithoutConstraints(node.width, node.height);
+    copyPaste(node, frame);
 
-    if (node.type === "FRAME") {
-        // Don't do anything to it if it's a frame
-        return node
-    }
+    node.remove();
+    return frame;
+  }
+
+  if (node.type === "FRAME") {
+    // Don't do anything to it if it's a frame
+    return node;
+  }
 }

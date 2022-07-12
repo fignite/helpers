@@ -27,3 +27,4 @@ export { setDocumentData, getDocumentData, updateDocumentData } from './document
 export { getRecentFilesAsync } from './getRecentFilesAsync'
 export { getRemoteFilesAsync, removeRemoteFile } from './getRemoteFilesAsync'
 export { incrementName } from './incrementName'
+export { genUID } from './genUID'

@@ -44,7 +44,15 @@ function File(data?) {
   }
 }
 
-export async function getRecentFilesAsync(fileData?, opts?): Promise<object[]> {
+type Opts = {
+  expire?: number;
+  limit?: number;
+};
+
+export async function getRecentFilesAsync(
+  fileData?,
+  opts?: Opts
+): Promise<object[]> {
   opts = opts || {};
   // Should it include an option top only add published components/data?
   // const publishedComponents = await getPublishedComponents(fileData)
@@ -108,7 +116,7 @@ export async function getRecentFilesAsync(fileData?, opts?): Promise<object[]> {
             }
           });
 
-          // Sort by firstVisitedByPlugin
+          // Sort by lastVisisted
 
           recentFiles.sort((a, b) => {
             if (a.lastVisited === b.lastVisited) return 0;
@@ -131,6 +139,10 @@ export async function getRecentFilesAsync(fileData?, opts?): Promise<object[]> {
                 }
               }
             });
+          }
+
+          if (opts.limit) {
+            recentFiles = recentFiles.slice(0, opts.limit);
           }
         }
       }

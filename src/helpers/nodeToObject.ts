@@ -82,6 +82,17 @@ export const nodeToObject = (
     }
   }
 
+  // PluginData
+  if (options.pluginData && node.getPluginDataKeys().length > 0) {
+    obj.pluginData = {};
+    node.getPluginDataKeys().forEach((key: string) => {
+      obj.pluginData[key] = node.getPluginData(key);
+    });
+    Object.getOwnPropertyNames(obj.pluginData).length === 0
+      ? delete obj.pluginData
+      : null;
+  }
+
   // Shared Plugin Data
   if (options.sharedPluginDataNameSpaces) {
     obj.sharedPluginData = {};

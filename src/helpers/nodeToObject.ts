@@ -4,7 +4,7 @@ export const nodeToObject = (
     withoutRelations?: boolean;
     removeConflicts?: boolean;
     pluginData?: boolean;
-    sharedPluginDataNameSpaces?: Array<string>;
+    sharedPluginDataNamespaces?: Array<string>;
   }
 ) => {
   const props = Object.entries(
@@ -94,10 +94,10 @@ export const nodeToObject = (
   }
 
   // Shared Plugin Data
-  if (options.sharedPluginDataNameSpaces) {
+  if (options.sharedPluginDataNamespaces) {
     obj.sharedPluginData = {};
 
-    options.sharedPluginDataNameSpaces.forEach((namespace) => {
+    options.sharedPluginDataNamespaces.forEach((namespace) => {
       obj.sharedPluginData[namespace] = {};
 
       node.getSharedPluginDataKeys(namespace).forEach((key: string) => {

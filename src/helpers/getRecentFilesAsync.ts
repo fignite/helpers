@@ -1,4 +1,7 @@
-import { updateClientStorageAsync } from "./clientStorage";
+import {
+  getClientStorageAsync,
+  updateClientStorageAsync,
+} from "./clientStorage";
 import { getDocumentData, setDocumentData } from "./documentData";
 import { getPluginData } from "./pluginData";
 import { genUID } from "./genUID";
@@ -22,9 +25,48 @@ function isUnique(array, object) {
   return index === -1 ? true : false;
 }
 
-function getDupeFile(array, object) {
-  let index = array.findIndex((x) => x.id === object.id);
-  return array[index];
+export function move(array, from, to, replaceWith?) {
+  // Remove from array
+  let element = array.splice(from, 1)[0];
+
+  // Add to array
+  if (replaceWith) {
+    array.splice(to, 0, replaceWith);
+  } else {
+    array.splice(to, 0, element);
+  }
+
+  return array;
+}
+
+export function upsert(array, cb, entry?) {
+  array.some((item, index) => {
+    let result = false;
+    if (true === cb(array[index])) {
+      result = true;
+      // move to top
+      if (entry) {
+        move(array, index, 0, entry);
+      } else {
+        move(array, index, 0);
+      }
+    }
+
+    return result;
+  });
+
+  let matchFound = false;
+  array.map((item, index) => {
+    if (true === cb(array[index])) {
+      matchFound = true;
+    }
+  });
+
+  if (!matchFound) {
+    array.unshift(entry);
+  }
+
+  return array;
 }
 
 function File(data?) {
@@ -159,4 +201,14 @@ export async function getRecentFilesAsync(
   }
 
   return recentFiles;
+}
+
+export async function addRecentFileAsync(file) {
+  return await updateClientStorageAsync("recentFiles", (recentFiles) => {
+    recentFiles = recentFiles || [];
+
+    recentFiles = upsert(recentFiles, (item) => item.id === file.id, file);
+
+    return recentFiles;
+  });
 }

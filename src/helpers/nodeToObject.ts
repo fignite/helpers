@@ -1,6 +1,6 @@
 export const nodeToObject = (
   node: any,
-  options: {
+  options?: {
     withoutRelations?: boolean;
     removeConflicts?: boolean;
     pluginData?: boolean;

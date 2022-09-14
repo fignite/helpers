@@ -1,3 +1,20 @@
+function isObjLiteral(_obj) {
+  var _test = _obj;
+  return typeof _obj !== "object" || _obj === null
+    ? false
+    : (function () {
+        while (!false) {
+          if (
+            Object.getPrototypeOf((_test = Object.getPrototypeOf(_test))) ===
+            null
+          ) {
+            break;
+          }
+        }
+        return Object.getPrototypeOf(_obj) === _test;
+      })();
+}
+
 const nodeProps: string[] = [
   "id",
   "parent",
@@ -165,7 +182,7 @@ type Callback = (prop: string) => void;
 
 export function copyPaste(
   source: any,
-  target: {} | BaseNode,
+  target: any | BaseNode,
   ...args: (Options | Callback)[]
 ) {
   var targetIsEmpty;
@@ -232,9 +249,13 @@ export function copyPaste(
     if (source.key) obj.key = source.key;
   }
 
-  const props = Object.entries(
-    Object.getOwnPropertyDescriptors(source.__proto__)
-  );
+  let props;
+
+  if (!isObjLiteral(source)) {
+    props = Object.entries(Object.getOwnPropertyDescriptors(source.__proto__));
+  } else {
+    props = Object.entries(source);
+  }
 
   for (const [key, value] of props) {
     if (allowlist.includes(key)) {
@@ -242,7 +263,11 @@ export function copyPaste(
         if (typeof obj[key] === "symbol") {
           obj[key] = "Mixed";
         } else {
-          obj[key] = value.get.call(source);
+          if (!isObjLiteral(source)) {
+            obj[key] = value.get.call(source);
+          } else {
+            obj[key] = value;
+          }
         }
       } catch (err) {
         obj[key] = undefined;
@@ -333,7 +358,9 @@ export function copyPaste(
     }
   }
 
+  console.log(obj);
+
   Object.assign(target, obj);
 
-  return obj;
+  return target;
 }

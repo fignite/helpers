@@ -32,19 +32,19 @@ export const nodeToObject = (
       }
     }
   }
-  if (node.parent && !options.withoutRelations) {
+  if (node.parent && !options?.withoutRelations) {
     obj.parent = { id: node.parent.id, type: node.parent.type };
   }
-  if (node.children && !options.withoutRelations) {
+  if (node.children && !options?.withoutRelations) {
     obj.children = node.children.map((child: any) =>
       nodeToObject(child, options)
     );
   }
-  if (node.masterComponent && !options.withoutRelations) {
+  if (node.masterComponent && !options?.withoutRelations) {
     obj.masterComponent = nodeToObject(node.masterComponent, options);
   }
 
-  if (!options.removeConflicts) {
+  if (!options?.removeConflicts) {
     !obj.fillStyleId && obj.fills ? delete obj.fillStyleId : delete obj.fills;
     !obj.strokeStyleId && obj.strokes
       ? delete obj.strokeStyleId
@@ -83,7 +83,7 @@ export const nodeToObject = (
   }
 
   // PluginData
-  if (options.pluginData && node.getPluginDataKeys().length > 0) {
+  if (options?.pluginData && node.getPluginDataKeys().length > 0) {
     obj.pluginData = {};
     node.getPluginDataKeys().forEach((key: string) => {
       obj.pluginData[key] = node.getPluginData(key);
@@ -94,10 +94,10 @@ export const nodeToObject = (
   }
 
   // Shared Plugin Data
-  if (options.sharedPluginDataNamespaces) {
+  if (options?.sharedPluginDataNamespaces) {
     obj.sharedPluginData = {};
 
-    options.sharedPluginDataNamespaces.forEach((namespace) => {
+    options?.sharedPluginDataNamespaces.forEach((namespace) => {
       obj.sharedPluginData[namespace] = {};
 
       node.getSharedPluginDataKeys(namespace).forEach((key: string) => {

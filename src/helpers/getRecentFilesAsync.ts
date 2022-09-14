@@ -52,6 +52,8 @@ export function upsert(array, cb, entry?) {
       }
     }
 
+    // console.log(array);
+
     return result;
   });
 
@@ -162,6 +164,13 @@ export async function getRecentFilesAsync(
 
           recentFiles.sort((a, b) => {
             if (a.lastVisited === b.lastVisited) return 0;
+
+            // If files don't have a lastVisited date then keep them at the top of the list.
+            if (
+              typeof a.lastVisited === "undefined" ||
+              typeof b.lastVisited === "undefined"
+            )
+              return 0;
 
             return a.lastVisited > b.lastVisited ? -1 : 1;
           });

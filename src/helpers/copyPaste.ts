@@ -358,8 +358,6 @@ export function copyPaste(
     }
   }
 
-  console.log(obj);
-
   Object.assign(target, obj);
 
   return target;

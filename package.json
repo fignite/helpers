@@ -47,6 +47,7 @@
   "homepage": "https://github.com/fignite/helpers#readme",
   "dependencies": {
     "babelrc-rollup": "^3.0.0",
+    "link": "^1.5.1",
     "require-dir": "^1.2.0",
     "rollup": "^2.57.0",
     "rollup-plugin-babel": "^4.4.0",

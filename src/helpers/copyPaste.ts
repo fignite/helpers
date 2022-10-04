@@ -358,6 +358,14 @@ export function copyPaste(
     }
   }
 
+  if (
+    target.type !== "FRAME" ||
+    target.type !== "COMPONENT" ||
+    target.type !== "COMPONENT_SET"
+  ) {
+    delete obj.backgrounds;
+  }
+
   Object.assign(target, obj);
 
   return target;

@@ -1,6 +1,6 @@
 {
   "name": "@fignite/helpers",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A collection of helpers for Figma plugins",
   "main": "dist/index.js",
   "devDependencies": {

@@ -34,11 +34,11 @@ function groupToFrame(group) {
  * @returns Returns the new node as a frame
  */
 
-export function convertToFrame(node) {
+export function convertToFrame(node: SceneNode): FrameNode {
   // Save index, parent and rotation of group before removed
   let nodeIndex = node.parent.children.indexOf(node);
   let nodeParent = node.parent;
-  let newFrame;
+  let newFrame: FrameNode;
 
   if (node.type === "INSTANCE") {
     newFrame = node.detachInstance();

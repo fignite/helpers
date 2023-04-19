@@ -15,6 +15,11 @@ export default {
         file: 'dist/index.js'
     },
     plugins: [
-        typescript({exclude: ["/__tests__"]})
+        typescript(
+            {
+                inlineSourceMap: true,
+                exclude: ["/__tests__"]
+            }
+        )
     ]
 };

@@ -9,6 +9,7 @@ To contribute a helper to the library please fork the `main` branch, follow the 
  
 1. Create a file for your helper in `src/helpers/`
 2. Create a unit test in `__tests__`
+4. Add your helper to the `src/index.ts` file
 3. Test that it works (see below)
 
 

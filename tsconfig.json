@@ -9,5 +9,6 @@
         "./node_modules/@figma"
     ]
   },
+  "include": ["src"],
   "exclude": ["dist", "node_modules", "__tests__"]
 }

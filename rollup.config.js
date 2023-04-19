@@ -17,7 +17,6 @@ export default {
     plugins: [
         typescript(
             {
-                inlineSourceMap: true,
                 exclude: ["/__tests__"]
             }
         )

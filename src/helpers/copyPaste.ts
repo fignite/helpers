@@ -260,8 +260,16 @@ export function copyPaste(
   for (const [key, value] of props) {
     if (allowlist.includes(key)) {
       try {
-        if (typeof obj[key] === "symbol") {
-          obj[key] = "Mixed";
+        // if (key === "strokeWeight") {
+        //   console.log("strokeWeight", value.get.call(source));
+        // }
+
+        // Add check to see if value is  symbol
+        if (
+          typeof obj[key] === "symbol" || // Don't think this is working as obj is empty
+          typeof value.get.call(source) === "symbol"
+        ) {
+          // obj[key] = "Mixed"; // Don't provide because cannot apply to nodes
         } else {
           if (!isObjLiteral(source)) {
             obj[key] = value.get.call(source);
@@ -273,7 +281,6 @@ export function copyPaste(
         obj[key] = undefined;
       }
     }
-
     // Needs building in
     // if (callback) {
     //     callback(obj)

@@ -263,11 +263,9 @@ export function copyPaste(
         // if (key === "strokeWeight") {
         //   console.log("strokeWeight", value.get.call(source));
         // }
-
         // Add check to see if value is  symbol
         if (
-          typeof obj[key] === "symbol" || // Don't think this is working as obj is empty
-          typeof value.get.call(source) === "symbol"
+          typeof source[key] === "symbol" // Don't think this is working as obj is empty
         ) {
           // obj[key] = "Mixed"; // Don't provide because cannot apply to nodes
         } else {
@@ -290,6 +288,7 @@ export function copyPaste(
     // }
   }
 
+  // These are properties that have no setters and would break plugin when trying to set on a node
   if (!removeConflicts) {
     !obj.fillStyleId && obj.fills ? delete obj.fillStyleId : delete obj.fills;
     !obj.strokeStyleId && obj.strokes

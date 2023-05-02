@@ -1,3 +1,7 @@
+// Refactor this function so that it:
+// Has an option for overridesOnly
+// Has an option to copyPaste recursively (via children)
+
 function isObjLiteral(_obj) {
   var _test = _obj;
   return typeof _obj !== "object" || _obj === null
@@ -13,6 +17,16 @@ function isObjLiteral(_obj) {
         }
         return Object.getPrototypeOf(_obj) === _test;
       })();
+}
+
+function isObjEmpty(value) {
+  if (
+    value &&
+    Object.keys(value).length === 0 &&
+    value.constructor === Object
+  ) {
+    return true;
+  }
 }
 
 const nodeProps: string[] = [
@@ -325,6 +339,14 @@ export function copyPaste(
     } else {
       delete obj.cornerRadius;
     }
+
+    // Can't be applied to an instance, remove for now
+    if (obj.overflowDirection) {
+      delete obj.overflowDirection;
+    }
+    if (obj.isMask) {
+      delete obj.isMask;
+    }
   }
 
   // Only applicable to objects because these properties cannot be set on nodes
@@ -365,14 +387,18 @@ export function copyPaste(
   }
 
   if (
-    target.type !== "FRAME" ||
-    target.type !== "COMPONENT" ||
-    target.type !== "COMPONENT_SET"
+    target?.type !== "FRAME" ||
+    target?.type !== "COMPONENT" ||
+    target?.type !== "COMPONENT_SET"
   ) {
     delete obj.backgrounds;
   }
 
-  Object.assign(target, obj);
+  // console.log(obj);
+
+  if (!isObjEmpty(obj)) {
+    Object.assign(target, obj);
+  }
 
   return target;
 }

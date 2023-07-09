@@ -63,7 +63,12 @@ export function replace(target, source) {
 
   if (result) {
     // FIXME: Add this into copyPaste helper
-    result.resizeWithoutConstraints(targetWidth, targetHeight);
+
+    // FIXME: How to resize 0 height/width nodes
+    if (targetWidth >= 0.01 && targetHeight >= 0.01) {
+      result.resizeWithoutConstraints(targetWidth, targetHeight);
+    }
+
     copyPaste(targetCopy, result, { include: ["x", "y", "constraints"] });
 
     // copyPaste not working properly so have to manually copy x and y

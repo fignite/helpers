@@ -18,6 +18,7 @@ Before you begin, ensure you have the following prerequisites:
     ```
 
 2. Install dependencies:
+
     ```bash
     pnpm install
     ```
@@ -44,6 +45,7 @@ To contribute a new helper, follow these steps:
     ```
 
 2. In a new terminal, start the sandbox plugin:
+
     ```bash
     cd ../../test/sandbox
     pnpm dev

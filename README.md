@@ -4,7 +4,7 @@ A collection of helpers for Figma plugins and widgets.
 
 ## Install
 
-Install using the following
+Install using the following.
 
 ```bash
 npm install @fignite/helpers
@@ -12,9 +12,11 @@ npm install @fignite/helpers
 
 ## Usage
 
-Include helpers in your `main` code
+Include helpers in your `main` code.
 
 ```js
+// main.ts
+
 import { getPageNode } from '@fignite/helpers'
 
 figma.on('selectionchange', () => {

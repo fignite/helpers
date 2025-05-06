@@ -6,14 +6,15 @@ We welcome your contributions to this library, please read the below to see how 
 
 To contribute a helper to the library please fork the `main` branch, follow the steps below and raise a pull request. If you need any help just let us know in your pull request.
 
-1. Create a file for your helper in `src/helpers/`
-2. Create a unit test in `__tests__`
-3. Add your helper to the `src/index.ts` file
-4. Test that it works (see below)
+1. Create a file for your helper in `packages/helpers/src`
+2. Add your helper to the `src/index.ts` file
+3. Test that it works (see below)
+
+### Developing
 
 ### Testing locally
 
-To test your helper works locally you can use `npm link`.
+To test your helper works locally you can use the sandbox.
 
 First create a link from your fork of `@fignite/helpers` and run the dev command.
 
@@ -28,16 +29,9 @@ Then in your own project import the helper and check that it works by linking it
 ```js
 // ~/Sites/myPlugin/code.ts
 
-import { myHelper } from "@fignite/helpers";
+import { myHelper } from '@fignite/helpers'
 
 // ...
 
-myHelper();
-```
-
-Linking locally
-
-```bash
-cd ~/Sites/myPlugin
-npm link @fignite/helpers
+myHelper()
 ```

@@ -1,9 +1,9 @@
 {
-	"extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
 		"target": "ESNext",
 		"useDefineForClassFields": true,
 		"module": "ESNext",
+		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
 		/**
 		 * Typecheck JS in `.svelte` and `.js` files by default.
@@ -17,5 +17,5 @@
 		"moduleDetection": "force",
 		"typeRoots": ["node_modules/@figma", "node_modules/@types"]
 	},
-	"include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
+	"include": ["src/**/*.ts", "src/**/*.js"]
 }

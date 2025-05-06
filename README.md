@@ -1,8 +1,8 @@
-# fignite/helpers
+# @fignite/helpers
 
 A collection of helpers for Figma plugins and widgets.
 
-## Usage
+## Install
 
 Install using the following
 
@@ -10,13 +10,26 @@ Install using the following
 npm install @fignite/helpers
 ```
 
-Include in your `main` code
+## Usage
+
+Include helpers in your `main` code
 
 ```js
-import { ungroup } from '@fignite/helpers'
+import { getPageNode } from '@fignite/helpers'
+
+figma.on('selectionchange', () => {
+    const selection = figma.currentPage.selection
+    if (selection.length === 0) return
+
+    const pageNode = getPageNode(selection[0])
+
+    console.log(pageNode)
+})
 ```
 
-## Type definitions
+You can see a list of the helpers inside [packages/helpers/src](/packages/helpers/src).
+
+<!-- ## Type definitions
 
 Update `tsconfig.json` to point to the type definitions.
 
@@ -30,7 +43,7 @@ Update `tsconfig.json` to point to the type definitions.
         ],
     },
 }
-```
+``` -->
 
 ## Contributing
 

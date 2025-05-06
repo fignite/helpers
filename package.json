@@ -4,9 +4,17 @@
 		"packages/*"
 	],
 	"packageManager": "pnpm@9.10.0",
+	"scripts": {
+		"build": "pnpm --filter @fignite/helpers build",
+		"dev": "pnpm --filter @fignite/helpers dev",
+		"publish": "pnpm --filter @fignite/helpers np"
+	},
 	"engines": {
 		"node": ">=20.17.0",
 		"pnpm": ">=9.10.0",
 		"npm": "forbidden, use pnpm"
+	},
+	"dependencies": {
+		"np": "^10.2.0"
 	}
 }

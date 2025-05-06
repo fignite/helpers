@@ -1,44 +1,70 @@
 # Contributing
 
-We welcome your contributions to this library, please read the below to see how you can help.
+We welcome your contributions to this library! This document outlines the guidelines and instructions for contributing to the project.
 
-## New helpers
+## Development Setup
 
-To contribute a helper to the library please fork the `main` branch, follow the steps below and raise a pull request.
+Before you begin, ensure you have the following prerequisites:
 
-### Testing locally
+- Node.js (latest LTS version recommended)
+- pnpm package manager
+- Figma desktop app (for testing)
 
-To test your helper works locally:
+1. Clone the repository:
 
-1. Navigate to the helpers package directory:
+    ```bash
+    git clone https://github.com/fignite/helpers.git
+    cd helpers
+    ```
+
+2. Install dependencies:
+    ```bash
+    pnpm install
+    ```
+
+## Creating a New Helper
+
+To contribute a new helper, follow these steps:
+
+1. Create a new file in `packages/helpers/src`
+    - Use a descriptive name that reflects the helper's functionality
+    - Follow the existing file naming convention
+2. Add your helper to the exports in `packages/helpers/src/index.ts`
+3. Test your implementation (see [Testing Your Helper](#testing-your-helper))
+
+## Testing Your Helper
+
+### Local Development
+
+1. Start the helpers package development server:
 
     ```bash
     cd packages/helpers
-    ```
-
-2. Start the development server:
-
-    ```bash
     pnpm dev
     ```
 
-3. In a new terminal, navigate to the sandbox plugin directory and start its development server:
-
+2. In a new terminal, start the sandbox plugin:
     ```bash
     cd ../../test/sandbox
     pnpm dev
     ```
 
-4. Import the sandbox plugin in Figma:
+### Testing in Figma
 
-    - Open a file in Figma
-    - Search for "Import plugin from manifest..." using the Quick Actions bar
-    - Choose the `manifest.json` file from the `test/sandbox/dist` folder
+1. Import the sandbox plugin in Figma:
 
-5. You can now use your helper in the sandbox plugin to test its functionality.
+    - Open a Figma file
+    - Use Quick Actions (⌘/ or Ctrl+/)
+    - Search for "Import plugin from manifest..."
+    - Select the `manifest.json` file from `test/sandbox/dist`
 
-For more details about the sandbox plugin, see the instructions in the `test/sandbox` package.
+2. Test your helper's functionality in the sandbox plugin:
+    - Verify all features work as expected
+    - Test edge cases and error handling
+    - Ensure the helper is performant
 
-### Raising a Pull Request
+For more details about the sandbox plugin, see the instructions in the `test/sandbox` directory.
 
-Once you've tested your helper and confirmed it works as expected, raise a pull request against the `main` branch. We'll review your pull request and provide feedback if needed. Once approved, your helper will be merged into the library.
+## Submitting Changes
+
+The maintainers will review your pull request and provide feedback if needed. Once approved, your helper will be merged into the library.

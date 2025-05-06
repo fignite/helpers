@@ -12,8 +12,7 @@
 		"test": "jest",
 		"clean": "rimraf dist",
 		"prebuild": "npm run clean",
-		"prepublishOnly": "npm run build",
-		"publish": "np"
+		"prepublishOnly": "npm run build"
 	},
 	"files": [
 		"dist/"

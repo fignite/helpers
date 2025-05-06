@@ -9,7 +9,6 @@
 	"scripts": {
 		"build": "tsc && rollup -c",
 		"dev": "tsc && rollup -c -w",
-		"test": "jest",
 		"clean": "rimraf dist",
 		"prebuild": "npm run clean",
 		"prepublishOnly": "npm run build"
@@ -35,7 +34,7 @@
 		"plugins"
 	],
 	"author": "",
-	"license": "ISC",
+	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/fignite/helpers/issues"
 	},

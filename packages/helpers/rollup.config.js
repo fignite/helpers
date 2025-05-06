@@ -7,14 +7,7 @@ const config = {
 			file: 'dist/index.js',
 			format: 'esm',
 			sourcemap: true,
-		},
-		{
-			file: 'dist/index.cjs',
-			format: 'cjs',
-			sourcemap: true,
-			exports: 'named',
-			strict: true,
-		},
+		}
 	],
 	plugins: [
 		typescript({

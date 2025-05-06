@@ -1,24 +1,33 @@
-// import babel from 'rollup-plugin-babel';
-// import babelrc from 'babelrc-rollup';
-// import dts from 'rollup-plugin-dts' // Bundles type declarations
-// import typescript from 'rollup-plugin-typescript';
-import typescript from 'rollup-plugin-typescript2';
-// import ts from 'rollup-plugin-ts';
+import typescript from '@rollup/plugin-typescript';
+import dts from 'rollup-plugin-dts';
 
-// rollup-plugin-typescript doesn't output type declarations so using rollup-plugin-typescript2 for now
-
-
-export default {
-    input: 'src/index.ts',
-    output: {
-        format: 'cjs',
-        file: 'dist/index.js'
-    },
-    plugins: [
-        typescript(
+const config = [
+    {
+        input: 'src/index.ts',
+        output: [
             {
-                exclude: ["/__tests__"]
-            }
-        )
-    ]
-};
+                file: 'dist/index.js',
+                format: 'esm',
+                sourcemap: true,
+            },
+            {
+                file: 'dist/index.cjs',
+                format: 'cjs',
+                sourcemap: true,
+            },
+        ],
+        plugins: [
+            typescript({
+                tsconfig: './tsconfig.json',
+            }),
+        ],
+        external: ['@figma/plugin-typings'],
+    },
+    {
+        input: 'dist/index.d.ts',
+        output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+        plugins: [dts()],
+    },
+];
+
+export default config;

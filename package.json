@@ -1,8 +1,5 @@
 {
 	"private": true,
-	"workspaces": [
-		"packages/*"
-	],
 	"packageManager": "pnpm@9.10.0",
 	"scripts": {
 		"build": "pnpm --filter @fignite/helpers build",
@@ -14,7 +11,8 @@
 		"pnpm": ">=9.10.0",
 		"npm": "forbidden, use pnpm"
 	},
-	"dependencies": {
-		"np": "^10.2.0"
+	"dependencies": {},
+	"devDependencies": {
+		"lerna": "^8.2.2"
 	}
 }

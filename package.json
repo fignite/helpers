@@ -7,7 +7,7 @@
 	"scripts": {
 		"build": "pnpm --filter @fignite/helpers build",
 		"dev": "pnpm --filter @fignite/helpers dev",
-		"publish": "pnpm --filter @fignite/helpers np"
+		"publish": "pnpm --filter @fignite/helpers publish"
 	},
 	"engines": {
 		"node": ">=20.17.0",

@@ -1,13 +1,7 @@
 # Publishing
 
-Install `np` for publishing.
+Publish packages using `lerna`
 
 ```bash
-npm install --global np
-```
-
-Publish by running `np`
-
-```bash
-np
+npx lerna publish
 ```

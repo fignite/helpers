@@ -4,34 +4,41 @@ We welcome your contributions to this library, please read the below to see how 
 
 ## New helpers
 
-To contribute a helper to the library please fork the `main` branch, follow the steps below and raise a pull request. If you need any help just let us know in your pull request.
-
-1. Create a file for your helper in `packages/helpers/src`
-2. Add your helper to the `src/index.ts` file
-3. Test that it works (see below)
-
-### Developing
+To contribute a helper to the library please fork the `main` branch, follow the steps below and raise a pull request.
 
 ### Testing locally
 
-To test your helper works locally you can use the sandbox.
+To test your helper works locally:
 
-First create a link from your fork of `@fignite/helpers` and run the dev command.
+1. Navigate to the helpers package directory:
 
-```bash
-cd ~/Sites/fignite-helpers
-npm link
-npm run dev
-```
+    ```bash
+    cd packages/helpers
+    ```
 
-Then in your own project import the helper and check that it works by linking it locally.
+2. Start the development server:
 
-```js
-// ~/Sites/myPlugin/code.ts
+    ```bash
+    pnpm dev
+    ```
 
-import { myHelper } from '@fignite/helpers'
+3. In a new terminal, navigate to the sandbox plugin directory and start its development server:
 
-// ...
+    ```bash
+    cd ../../test/sandbox
+    pnpm dev
+    ```
 
-myHelper()
-```
+4. Import the sandbox plugin in Figma:
+
+    - Open a file in Figma
+    - Search for "Import plugin from manifest..." using the Quick Actions bar
+    - Choose the `manifest.json` file from the `test/sandbox/dist` folder
+
+5. You can now use your helper in the sandbox plugin to test its functionality.
+
+For more details about the sandbox plugin, see the instructions in the `test/sandbox` package.
+
+### Raising a Pull Request
+
+Once you've tested your helper and confirmed it works as expected, raise a pull request against the `main` branch. We'll review your pull request and provide feedback if needed. Once approved, your helper will be merged into the library.

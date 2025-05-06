@@ -1,1 +1,0 @@
-export { prompt } from './prompt'

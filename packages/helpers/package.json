@@ -1,0 +1,51 @@
+{
+	"name": "@fignite/helpers",
+	"version": "0.3.1",
+	"description": "A collection of helpers for Figma plugins",
+	"type": "module",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"scripts": {
+		"build": "tsc && rollup -c",
+		"dev": "tsc && rollup -c -w",
+		"test": "jest",
+		"clean": "rimraf dist",
+		"prebuild": "npm run clean",
+		"prepublishOnly": "npm run build"
+	},
+	"files": [
+		"dist/"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/fignite/helpers.git"
+	},
+	"keywords": [
+		"figma",
+		"helpers",
+		"functions",
+		"plugins"
+	],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/fignite/helpers/issues"
+	},
+	"homepage": "https://github.com/fignite/helpers#readme",
+	"devDependencies": {
+		"@figma/plugin-typings": "^1.39.1",
+		"@rollup/plugin-typescript": "^11.1.6",
+		"rimraf": "^5.0.10",
+		"rollup": "^4.9.6",
+		"rollup-plugin-dts": "^6.1.0",
+		"typescript": "^4.9.5"
+	}
+}

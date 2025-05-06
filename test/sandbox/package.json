@@ -2,6 +2,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
+		"build:fignite": "pnpm build --filter @fignite/helpers",
 		"dev": "plugma dev",
 		"build": "plugma build",
 		"preview": "plugma preview",

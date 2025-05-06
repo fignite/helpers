@@ -1,69 +1,8 @@
 {
-	"name": "@fignite/helpers",
-	"version": "0.3.1",
-	"description": "A collection of helpers for Figma plugins",
-	"type": "module",
-	"main": "./dist/index.js",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"devDependencies": {
-		"@babel/cli": "^7.13.16",
-		"@babel/core": "^7.14.0",
-		"@babel/preset-env": "^7.21.4",
-		"@babel/preset-typescript": "^7.13.0",
-		"@figma/plugin-typings": "^1.39.1",
-		"@rollup/plugin-typescript": "^11.1.6",
-		"figma-api-stub": "0.0.45",
-		"jest": "^26.6.3",
-		"rimraf": "^5.0.5",
-		"rollup": "^2.57.0",
-		"rollup-plugin-dts": "^6.1.0",
-		"typescript": "^4.4.4"
-	},
-	"scripts": {
-		"build": "tsc && rollup -c",
-		"dev": "rollup -c -w",
-		"test": "jest",
-		"clean": "rimraf dist",
-		"prebuild": "npm run clean",
-		"prepublishOnly": "npm run build"
-	},
-	"files": [
-		"dist/"
+	"private": true,
+	"workspaces": [
+		"packages/*"
 	],
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
-		},
-		"./helpers/*": {
-			"types": "./dist/helpers/*.d.ts",
-			"import": "./dist/helpers/*.js",
-			"require": "./dist/helpers/*.cjs"
-		},
-		"./interface/*": {
-			"types": "./dist/interface/*.d.ts",
-			"import": "./dist/interface/*.js",
-			"require": "./dist/interface/*.cjs"
-		}
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/fignite/helpers.git"
-	},
-	"keywords": [
-		"figma",
-		"helpers",
-		"functions",
-		"plugins"
-	],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/fignite/helpers/issues"
-	},
-	"homepage": "https://github.com/fignite/helpers#readme",
 	"packageManager": "pnpm@9.10.0",
 	"engines": {
 		"node": ">=20.17.0",

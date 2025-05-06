@@ -12,11 +12,17 @@ const config = {
 			file: 'dist/index.cjs',
 			format: 'cjs',
 			sourcemap: true,
+			exports: 'named',
+			strict: true,
 		},
 	],
 	plugins: [
 		typescript({
 			tsconfig: './tsconfig.json',
+			compilerOptions: {
+				module: 'ESNext',
+				target: 'ES2020',
+			},
 		}),
 	],
 	external: ['@figma/plugin-typings'],
